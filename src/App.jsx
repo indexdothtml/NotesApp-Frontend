@@ -1,12 +1,12 @@
-import TextField from "@mui/material/TextField";
+import { Outlet } from "react-router";
+
+import MainLayout from "./layouts/MainLayout.jsx";
 
 function App() {
   return (
-    <>
-      <div className="underline">Hello world</div>
-      {/* Testing material ui */}
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-    </>
+    <MainLayout>
+      <Outlet />
+    </MainLayout>
   );
 }
 
