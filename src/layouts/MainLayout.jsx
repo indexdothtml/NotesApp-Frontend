@@ -1,11 +1,14 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+} from "@mui/material";
+import { Menu as MenuIcon } from "@mui/icons-material";
 import { useNavigate } from "react-router";
+import { NavLink } from "react-router";
 
 import useAuth from "../hooks/useAuth.js";
 
@@ -30,7 +33,7 @@ function MainLayout({ children }) {
             </IconButton>
           )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Notes
+            <NavLink to="/">Notes</NavLink>
           </Typography>
           {isAuthenticated ? (
             <Button color="inherit">Logout</Button>

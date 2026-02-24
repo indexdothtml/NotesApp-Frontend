@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@layer components {
+  /* Custom style for input form */
+  .input-form-style {
+    @apply flex flex-col justify-center items-center gap-4 bg-inherit w-fit p-8 rounded-md;
+  }
+
+  /* Custom style for input field of form */
+  .input-form-field-style {
+    @apply flex flex-col gap-1;
+  }
+}
