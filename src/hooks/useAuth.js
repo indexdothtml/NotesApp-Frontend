@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { login, logout } from "../features/auth/authSlice.js";
+import { login, logout } from "../features/authSlice.js";
 
 function useAuth() {
   // Get authentication details.

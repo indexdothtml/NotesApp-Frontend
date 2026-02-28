@@ -13,8 +13,8 @@ import Error from "./components/Error.jsx";
 import router from "./routes.jsx";
 
 const theme = createTheme({
-  palette: {
-    mode: "dark",
+  colorSchemes: {
+    dark: true,
   },
 });
 
