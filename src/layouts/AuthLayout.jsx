@@ -1,8 +1,6 @@
 import { Box, Paper } from "@mui/material";
 
-function AuthLayout(Props) {
-  const { headerText = "", children } = Props;
-
+function AuthLayout({ headerText = "", children }) {
   return (
     <Box
       sx={{

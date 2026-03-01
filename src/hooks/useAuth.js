@@ -5,6 +5,7 @@ import { login, logout } from "../features/authSlice.js";
 function useAuth() {
   // Get authentication details.
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const userData = useSelector((state) => state.auth.userData);
 
   // Dispatch authentication functions.

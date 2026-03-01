@@ -14,7 +14,6 @@ import {
   Laptop,
 } from "@mui/icons-material";
 import { useNavigate, NavLink } from "react-router";
-import { useEffect } from "react";
 
 import useAuth from "../hooks/useAuth.js";
 import useLeftDrawer from "../hooks/useLeftDrawer.js";
@@ -29,11 +28,9 @@ function MainLayout({ children }) {
 
   const { dispatchOpenDrawer } = useLeftDrawer();
 
-  useEffect(() => {
-    if (!mode) {
-      setMode("dark");
-    }
-  }, []);
+  if (!mode) {
+    setMode("dark");
+  }
 
   const toggleTheme = () => {
     if (mode === "dark") {

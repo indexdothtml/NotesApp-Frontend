@@ -1,0 +1,78 @@
+{
+  "data": [
+    {
+      "_id": "1",
+      "name": "To Kill a Mockingbird",
+      "createdAt": "2026-01-05T10:00:00",
+      "updatedAt": "2026-02-10T14:30:00"
+    },
+    {
+      "_id": "2",
+      "name": "1984",
+      "createdAt": "2026-01-06T11:15:00",
+      "updatedAt": "2026-02-12T09:45:00"
+    },
+    {
+      "_id": "3",
+      "name": "Pride and Prejudice",
+      "createdAt": "2026-01-07T09:20:00",
+      "updatedAt": "2026-02-14T16:00:00"
+    },
+    {
+      "_id": "4",
+      "name": "The Great Gatsby",
+      "createdAt": "2026-01-08T13:40:00",
+      "updatedAt": "2026-02-15T18:25:00"
+    },
+    {
+      "_id": "5",
+      "name": "Moby-Dick",
+      "createdAt": "2026-01-09T08:10:00",
+      "updatedAt": "2026-02-16T12:50:00"
+    },
+    {
+      "_id": "6",
+      "name": "War and Peace",
+      "createdAt": "2026-01-10T15:00:00",
+      "updatedAt": "2026-02-18T20:30:00"
+    },
+    {
+      "_id": "7",
+      "name": "Crime and Punishment",
+      "createdAt": "2026-01-11T17:25:00",
+      "updatedAt": "2026-02-20T21:45:00"
+    },
+    {
+      "_id": "8",
+      "name": "The Catcher in the Rye",
+      "createdAt": "2026-01-12T07:55:00",
+      "updatedAt": "2026-02-22T10:10:00"
+    },
+    {
+      "_id": "9",
+      "name": "Brave New World",
+      "createdAt": "2026-01-13T12:35:00",
+      "updatedAt": "2026-02-24T15:55:00"
+    },
+    {
+      "_id": "10",
+      "name": "The Hobbit",
+      "createdAt": "2026-01-14T14:45:00",
+      "updatedAt": "2026-02-25T19:20:00"
+    },
+    {
+      "_id": "11",
+      "name": "Jane Eyre",
+      "createdAt": "2026-01-15T09:05:00",
+      "updatedAt": "2026-02-26T11:40:00"
+    },
+    {
+      "_id": "12",
+      "name": "Wuthering Heights",
+      "createdAt": "2026-01-16T16:15:00",
+      "updatedAt": "2026-02-28T22:00:00"
+    }
+  ],
+  "itemCount": 12,
+  "totalItems": 1000
+}
