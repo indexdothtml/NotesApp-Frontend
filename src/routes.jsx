@@ -9,6 +9,8 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import BooksPage from "./pages/BooksPage.jsx";
 import TasksPage from "./pages/TasksPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
+import BookPage from "./pages/BookPage.jsx";
+import ChapterPage from "./pages/ChapterPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <BooksPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/books/:bookId",
+        element: (
+          <ProtectedRoute>
+            <BookPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/books/:bookId/chapters/:chapterId",
+        element: (
+          <ProtectedRoute>
+            <ChapterPage />
           </ProtectedRoute>
         ),
       },
