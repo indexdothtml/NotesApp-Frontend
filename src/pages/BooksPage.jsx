@@ -1,10 +1,10 @@
 import { Button, Tooltip, Grid } from "@mui/material";
 import { Link } from "react-router";
 import { Add } from "@mui/icons-material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import SearchBar from "../components/SearchBar.jsx";
-import InputCard from "../components/InputCard.jsx";
+import InputCardModal from "../components/InputCardModal.jsx";
 import PaginatedBooks from "../components/PaginatedBooks.jsx";
 import ItemCard from "../components/ItemCard.jsx";
 import useModal from "../hooks/useModal.js";
@@ -27,6 +27,11 @@ function BooksPage() {
       .then((data) => setBooksDetails(data));
   }, [userId]);
 
+  const handleCreateNewBook = useCallback((data) => {
+    console.log(`New book name: ${data?.name}`);
+    // Call create new book api.
+  }, []);
+
   return (
     <>
       <div>
@@ -41,7 +46,7 @@ function BooksPage() {
           </Button>
         </div>
 
-        <h1 className="ml-4 font-semibold">Books</h1>
+        <h1 className="ml-4 font-semibold text-2xl">Books</h1>
 
         {/* Show all Books created by User */}
         <PaginatedBooks totalBooks={booksDetails?.totalItems}>
@@ -61,7 +66,8 @@ function BooksPage() {
         </PaginatedBooks>
       </div>
 
-      <InputCard inputName="book" />
+      {/* InputCardModal is a modal which can be opened with useModal hook */}
+      <InputCardModal onInputSubmit={handleCreateNewBook} />
     </>
   );
 }

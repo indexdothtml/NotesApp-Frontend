@@ -2,11 +2,11 @@ import { useParams } from "react-router";
 import { Button, Breadcrumbs, Tooltip, Grid } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { Link } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import SearchBar from "../components/SearchBar.jsx";
 import PaginatedChapters from "../components/PaginatedChapters.jsx";
-import InputCard from "../components/InputCard.jsx";
+import InputCardModal from "../components/InputCardModal.jsx";
 import ItemCard from "../components/ItemCard.jsx";
 import useModal from "../hooks/useModal.js";
 
@@ -24,6 +24,11 @@ function BookPage() {
       .then((response) => response.json())
       .then((data) => setChaptersDetails(data));
   }, [bookId]);
+
+  const handleCreateNewChapter = useCallback((data) => {
+    console.log(`New chapter name: ${data?.name}`);
+    // Call create new chapter api.
+  }, []);
 
   return (
     <>
@@ -51,7 +56,7 @@ function BookPage() {
           </Button>
         </div>
 
-        <h1 className="ml-4 font-semibold">The Project Hail Mary</h1>
+        <h1 className="ml-4 font-semibold text-2xl">The Project Hail Mary</h1>
 
         {/* Show all Chapters of the Book */}
         <PaginatedChapters totalChapters={chaptersDetails?.totalItems}>
@@ -71,7 +76,7 @@ function BookPage() {
         </PaginatedChapters>
       </div>
 
-      <InputCard inputName="chapter" />
+      <InputCardModal onInputSubmit={handleCreateNewChapter} />
     </>
   );
 }

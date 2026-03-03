@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import useModal from "../hooks/useModal.js";
 
 // InputCard is used to show small input text modal, which takes "New Book" name or "New Chapter" name
-function InputCard({ inputName }) {
+function InputCardModal({ onInputSubmit }) {
   // inputName can be "book" or "chapter" or "page"
   const {
     register,
@@ -14,35 +14,22 @@ function InputCard({ inputName }) {
 
   const { isOpen, dispatchCloseModal } = useModal();
 
-  const onSubmit = (data) => {
-    if (inputName === "book") {
-      // call create new book api
-      console.log(`book name: ${{ data }}`);
-    } else if (inputName === "chapter") {
-      // call create new chapter api
-    } else if (inputName === "page") {
-      // call create new page api
-    }
-
-    dispatchCloseModal();
-  };
-
   return (
     <Modal
       open={isOpen}
-      aria-labelledby={`create new ${inputName}`}
+      aria-labelledby="Create new book or chapter"
       className="flex justify-center items-center"
     >
       <Card>
         <CardContent>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onInputSubmit)}
             className="flex gap-2 items-center"
           >
             <div className="input-form-field-style mt-4">
               <TextField
                 id="textInput-id"
-                label={`${inputName} name`}
+                label={`Name`}
                 variant="outlined"
                 {...register("name", { required: true })}
               />
@@ -54,7 +41,12 @@ function InputCard({ inputName }) {
               </span>
             </div>
 
-            <Button variant="outlined" disabled={errors.name} type="submit">
+            <Button
+              variant="outlined"
+              disabled={errors.name}
+              type="submit"
+              onClick={dispatchCloseModal}
+            >
               Create
             </Button>
 
@@ -72,4 +64,4 @@ function InputCard({ inputName }) {
   );
 }
 
-export default InputCard;
+export default InputCardModal;
