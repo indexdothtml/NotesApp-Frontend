@@ -1,11 +1,10 @@
-import { useSelector, useDispatch } from "react-redux";
-
-import { openDrawer, closeDrawer } from "../features/leftDrawerSlice";
+import { openDrawer, closeDrawer } from "../features/leftDrawerSlice.ts";
+import { useAppSelector, useAppDispatch } from "./useStore.ts";
 
 function useLeftDrawer() {
-  const isOpen = useSelector((state) => state.leftDrawer.open);
+  const isOpen = useAppSelector((state) => state.leftDrawer.open);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const dispatchOpenDrawer = () => {
     dispatch(openDrawer());

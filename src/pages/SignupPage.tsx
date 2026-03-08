@@ -2,16 +2,23 @@ import { TextField, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router";
 
-import AuthLayout from "../layouts/AuthLayout.jsx";
+import AuthLayout from "../layouts/AuthLayout.tsx";
+
+type FormValues = {
+  fullName: string;
+  username: string;
+  email: string;
+  password: string;
+};
 
 function SignupPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: FormValues) => console.log(data);
   //TODO: Call register new user api service.
 
   return (
@@ -92,10 +99,10 @@ function SignupPage() {
           variant="outlined"
           type="submit"
           disabled={
-            errors.fullName ||
-            errors.username ||
-            errors.email ||
-            errors.password
+            (errors.fullName ||
+              errors.username ||
+              errors.email ||
+              errors.password) === undefined
           }
         >
           Create

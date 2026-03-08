@@ -1,74 +1,86 @@
 {
   "data": [
     {
-      "_id": "1",
-      "name": "To Kill a Mockingbird",
+      "id": 1,
+      "bookName": "To Kill a Mockingbird",
+      "totalChapters": 31,
       "createdAt": "2026-01-05T10:00:00",
       "updatedAt": "2026-02-10T14:30:00"
     },
     {
-      "_id": "2",
-      "name": "1984",
+      "id": 2,
+      "bookName": "1984",
+      "totalChapters": 24,
       "createdAt": "2026-01-06T11:15:00",
       "updatedAt": "2026-02-12T09:45:00"
     },
     {
-      "_id": "3",
-      "name": "Pride and Prejudice",
+      "id": 3,
+      "bookName": "Pride and Prejudice",
+      "totalChapters": 61,
       "createdAt": "2026-01-07T09:20:00",
       "updatedAt": "2026-02-14T16:00:00"
     },
     {
-      "_id": "4",
-      "name": "The Great Gatsby",
+      "id": 4,
+      "bookName": "The Great Gatsby",
+      "totalChapters": 9,
       "createdAt": "2026-01-08T13:40:00",
       "updatedAt": "2026-02-15T18:25:00"
     },
     {
-      "_id": "5",
-      "name": "Moby-Dick",
+      "id": 5,
+      "bookName": "Moby-Dick",
+      "totalChapters": 135,
       "createdAt": "2026-01-09T08:10:00",
       "updatedAt": "2026-02-16T12:50:00"
     },
     {
-      "_id": "6",
-      "name": "War and Peace",
+      "id": 6,
+      "bookName": "War and Peace",
+      "totalChapters": 365,
       "createdAt": "2026-01-10T15:00:00",
       "updatedAt": "2026-02-18T20:30:00"
     },
     {
-      "_id": "7",
-      "name": "Crime and Punishment",
+      "id": 7,
+      "bookName": "Crime and Punishment",
+      "totalChapters": 38,
       "createdAt": "2026-01-11T17:25:00",
       "updatedAt": "2026-02-20T21:45:00"
     },
     {
-      "_id": "8",
-      "name": "The Catcher in the Rye",
+      "id": 8,
+      "bookName": "The Catcher in the Rye",
+      "totalChapters": 26,
       "createdAt": "2026-01-12T07:55:00",
       "updatedAt": "2026-02-22T10:10:00"
     },
     {
-      "_id": "9",
-      "name": "Brave New World",
+      "id": 9,
+      "bookName": "Brave New World",
+      "totalChapters": 18,
       "createdAt": "2026-01-13T12:35:00",
       "updatedAt": "2026-02-24T15:55:00"
     },
     {
-      "_id": "10",
-      "name": "The Hobbit",
+      "id": 10,
+      "bookName": "The Hobbit",
+      "totalChapters": 19,
       "createdAt": "2026-01-14T14:45:00",
       "updatedAt": "2026-02-25T19:20:00"
     },
     {
-      "_id": "11",
-      "name": "Jane Eyre",
+      "id": 11,
+      "bookName": "Jane Eyre",
+      "totalChapters": 38,
       "createdAt": "2026-01-15T09:05:00",
       "updatedAt": "2026-02-26T11:40:00"
     },
     {
-      "_id": "12",
-      "name": "Wuthering Heights",
+      "id": 12,
+      "bookName": "Wuthering Heights",
+      "totalChapters": 34,
       "createdAt": "2026-01-16T16:15:00",
       "updatedAt": "2026-02-28T22:00:00"
     }

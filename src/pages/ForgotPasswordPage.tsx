@@ -1,16 +1,20 @@
 import { useForm } from "react-hook-form";
 import { TextField, Button } from "@mui/material";
 
-import AuthLayout from "../layouts/AuthLayout.jsx";
+import AuthLayout from "../layouts/AuthLayout.tsx";
+
+type FormValues = {
+  email: string;
+};
 
 function ForgotPasswordPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: FormValues) => console.log(data);
   // TDDO: Call forgot password api service.
 
   return (
@@ -32,7 +36,11 @@ function ForgotPasswordPage() {
           }
         </div>
 
-        <Button variant="outlined" type="submit" disabled={errors.email}>
+        <Button
+          variant="outlined"
+          type="submit"
+          disabled={errors.email === undefined}
+        >
           Send
         </Button>
       </form>

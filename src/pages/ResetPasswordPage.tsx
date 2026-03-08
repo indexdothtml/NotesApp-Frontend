@@ -1,16 +1,20 @@
 import { useForm } from "react-hook-form";
 import { TextField, Button } from "@mui/material";
 
-import AuthLayout from "../layouts/AuthLayout.jsx";
+import AuthLayout from "../layouts/AuthLayout.tsx";
+
+type FormValues = {
+  newPassowrd: string;
+};
 
 function ResetPasswordPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: FormValues) => console.log(data);
   // Note: Call reset password api service.
 
   return (
@@ -33,7 +37,11 @@ function ResetPasswordPage() {
           }
         </div>
 
-        <Button variant="outlined" type="submit" disabled={errors.newPassowrd}>
+        <Button
+          variant="outlined"
+          type="submit"
+          disabled={errors.newPassowrd === undefined}
+        >
           Reset
         </Button>
       </form>

@@ -1,21 +1,31 @@
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import { Button, Breadcrumbs, Tooltip, Grid } from "@mui/material";
 import { Add } from "@mui/icons-material";
-import { Link } from "react-router";
 import { useState, useEffect, useCallback } from "react";
 
-import SearchBar from "../components/SearchBar.jsx";
-import PaginatedChapters from "../components/PaginatedChapters.jsx";
-import InputCardModal from "../components/InputCardModal.jsx";
-import ItemCard from "../components/ItemCard.jsx";
-import useModal from "../hooks/useModal.js";
+import SearchBar from "../components/SearchBar.tsx";
+import PaginatedItems from "../components/PaginatedItems.tsx";
+import InputCardModal from "../components/InputCardModal.tsx";
+import DataCard from "../components/DataCard.tsx";
+import useModal from "../hooks/useModal.ts";
+import type { InputCardFormValues, ItemDetails } from "../types/types.ts";
+
+type ChapterData = {
+  id: number;
+  chapterName: string;
+  totalPages: number;
+  createdAt: string;
+  updatedAt: string;
+};
 
 function BookPage() {
   const { bookId } = useParams();
 
   const { dispatchOpenModal } = useModal();
 
-  const [chaptersDetails, setChaptersDetails] = useState(null);
+  const [chaptersDetails, setChaptersDetails] = useState<
+    ItemDetails<ChapterData>
+  >({ data: null, itemCount: 0, totalItems: 0 });
 
   // For testing purpose fetching using dummy json file.
   useEffect(() => {
@@ -25,8 +35,8 @@ function BookPage() {
       .then((data) => setChaptersDetails(data));
   }, [bookId]);
 
-  const handleCreateNewChapter = useCallback((data) => {
-    console.log(`New chapter name: ${data?.name}`);
+  const handleCreateNewChapter = useCallback((data: InputCardFormValues) => {
+    console.log(`New chapter name: ${data.name}`);
     // Call create new chapter api.
   }, []);
 
@@ -59,13 +69,21 @@ function BookPage() {
         <h1 className="ml-4 font-semibold text-2xl">The Project Hail Mary</h1>
 
         {/* Show all Chapters of the Book */}
-        <PaginatedChapters totalChapters={chaptersDetails?.totalItems}>
-          {chaptersDetails && chaptersDetails?.data?.length !== 0 ? (
-            chaptersDetails?.data?.map((chapter) => (
-              <Tooltip title={chapter?.name} key={chapter?._id}>
+        <PaginatedItems totalItems={chaptersDetails.totalItems}>
+          {chaptersDetails.data && chaptersDetails.data.length !== 0 ? (
+            chaptersDetails.data.map((chapter) => (
+              <Tooltip title={chapter.chapterName} key={chapter.id}>
                 <Grid size={2}>
-                  <Link to={`/books/${bookId}/chapters/${chapter?._id}`}>
-                    <ItemCard item={chapter} child="Pages" />
+                  <Link to={`/books/${bookId}/chapters/${chapter.id}`}>
+                    <DataCard
+                      data={{
+                        heading: chapter.chapterName,
+                        childrenCount: chapter.totalPages,
+                        createdAt: chapter.createdAt,
+                        updatedAt: chapter.updatedAt,
+                      }}
+                      showDataFor="chapter"
+                    />
                   </Link>
                 </Grid>
               </Tooltip>
@@ -73,7 +91,7 @@ function BookPage() {
           ) : (
             <div>Chapters not available to show create new chapter</div>
           )}
-        </PaginatedChapters>
+        </PaginatedItems>
       </div>
 
       <InputCardModal onInputSubmit={handleCreateNewChapter} />

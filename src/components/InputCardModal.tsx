@@ -1,16 +1,21 @@
 import { Modal, TextField, Button, Card, CardContent } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-import useModal from "../hooks/useModal.js";
+import useModal from "../hooks/useModal.ts";
+import type { InputCardFormValues } from "../types/types.ts";
+
+interface InputCardModalProps {
+  onInputSubmit: (data: InputCardFormValues) => void;
+}
 
 // InputCard is used to show small input text modal, which takes "New Book" name or "New Chapter" name
-function InputCardModal({ onInputSubmit }) {
+function InputCardModal({ onInputSubmit }: InputCardModalProps) {
   // inputName can be "book" or "chapter" or "page"
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<InputCardFormValues>();
 
   const { isOpen, dispatchCloseModal } = useModal();
 
@@ -43,7 +48,7 @@ function InputCardModal({ onInputSubmit }) {
 
             <Button
               variant="outlined"
-              disabled={errors.name}
+              disabled={errors.name === undefined}
               type="submit"
               onClick={dispatchCloseModal}
             >

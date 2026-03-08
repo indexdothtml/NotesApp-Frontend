@@ -1,6 +1,12 @@
 import { Box, Paper } from "@mui/material";
+import type { ReactNode } from "react";
 
-function AuthLayout({ headerText = "", children }) {
+interface AuthLayoutProps {
+  headerText?: string;
+  children: ReactNode;
+}
+
+function AuthLayout({ headerText = "", children }: AuthLayoutProps) {
   return (
     <Box
       sx={{

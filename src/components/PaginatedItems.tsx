@@ -1,12 +1,22 @@
 import { Pagination, Box, Grid } from "@mui/material";
-import { useState } from "react";
+import { useState, type ReactNode, type ChangeEvent } from "react";
 
-function PaginatedChapters({ children, totalChapters }) {
-  const chaptersPerPage = 12;
+export type PaginationHandleChangePage = (
+  event: ChangeEvent<unknown>,
+  page: number,
+) => void;
+
+interface PaginatedBooksProps {
+  children: ReactNode;
+  totalItems: number;
+}
+
+function PaginatedItems({ children, totalItems }: PaginatedBooksProps) {
+  const itemsPerPage = 12;
 
   const [page, setPage] = useState(1);
 
-  const handlePageChange = (event, value) => {
+  const handlePageChange: PaginationHandleChangePage = (_, value) => {
     console.log(value);
     setPage(value);
   };
@@ -21,7 +31,7 @@ function PaginatedChapters({ children, totalChapters }) {
           <Pagination
             page={page}
             onChange={handlePageChange}
-            count={Math.ceil(totalChapters / chaptersPerPage)}
+            count={Math.ceil(totalItems / itemsPerPage)}
             variant="outlined"
             shape="rounded"
           />
@@ -31,4 +41,4 @@ function PaginatedChapters({ children, totalChapters }) {
   );
 }
 
-export default PaginatedChapters;
+export default PaginatedItems;

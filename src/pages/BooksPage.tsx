@@ -3,19 +3,32 @@ import { Link } from "react-router";
 import { Add } from "@mui/icons-material";
 import { useState, useEffect, useCallback } from "react";
 
-import SearchBar from "../components/SearchBar.jsx";
-import InputCardModal from "../components/InputCardModal.jsx";
-import PaginatedBooks from "../components/PaginatedBooks.jsx";
-import ItemCard from "../components/ItemCard.jsx";
-import useModal from "../hooks/useModal.js";
-import useAuth from "../hooks/useAuth.js";
+import SearchBar from "../components/SearchBar.tsx";
+import InputCardModal from "../components/InputCardModal.tsx";
+import PaginatedItems from "../components/PaginatedItems.tsx";
+import DataCard from "../components/DataCard.tsx";
+import useModal from "../hooks/useModal.ts";
+import useAuth from "../hooks/useAuth.ts";
+import type { ItemDetails, InputCardFormValues } from "../types/types.ts";
+
+type BookData = {
+  id: number;
+  bookName: string;
+  totalChapters: number;
+  createdAt: string;
+  updatedAt: string;
+};
 
 function BooksPage() {
   const { dispatchOpenModal } = useModal();
 
   const { userData } = useAuth();
 
-  const [booksDetails, setBooksDetails] = useState(null);
+  const [booksDetails, setBooksDetails] = useState<ItemDetails<BookData>>({
+    data: null,
+    itemCount: 0,
+    totalItems: 0,
+  });
 
   const userId = userData?._id;
 
@@ -27,8 +40,8 @@ function BooksPage() {
       .then((data) => setBooksDetails(data));
   }, [userId]);
 
-  const handleCreateNewBook = useCallback((data) => {
-    console.log(`New book name: ${data?.name}`);
+  const handleCreateNewBook = useCallback((data: InputCardFormValues) => {
+    console.log(`New book name: ${data.name}`);
     // Call create new book api.
   }, []);
 
@@ -49,13 +62,21 @@ function BooksPage() {
         <h1 className="ml-4 font-semibold text-2xl">Books</h1>
 
         {/* Show all Books created by User */}
-        <PaginatedBooks totalBooks={booksDetails?.totalItems}>
-          {booksDetails && booksDetails?.data?.length !== 0 ? (
-            booksDetails?.data?.map((book) => (
-              <Tooltip title={book?.name} key={book?._id}>
+        <PaginatedItems totalItems={booksDetails.totalItems}>
+          {booksDetails.data && booksDetails.data.length !== 0 ? (
+            booksDetails.data.map((book) => (
+              <Tooltip title={book.bookName} key={book.id}>
                 <Grid size={2}>
-                  <Link to={`/books/${book?._id}`}>
-                    <ItemCard item={book} child="Chapters" />
+                  <Link to={`/books/${book.id}`}>
+                    <DataCard
+                      data={{
+                        heading: book.bookName,
+                        childrenCount: book.totalChapters,
+                        createdAt: book.createdAt,
+                        updatedAt: book.updatedAt,
+                      }}
+                      showDataFor="book"
+                    />
                   </Link>
                 </Grid>
               </Tooltip>
@@ -63,7 +84,7 @@ function BooksPage() {
           ) : (
             <div>Books not available to show create new book</div>
           )}
-        </PaginatedBooks>
+        </PaginatedItems>
       </div>
 
       {/* InputCardModal is a modal which can be opened with useModal hook */}

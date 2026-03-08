@@ -11,22 +11,18 @@ import {
 import { Book, Task, Settings } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 
-import useLeftDrawer from "../hooks/useLeftDrawer.js";
+import useLeftDrawer from "../hooks/useLeftDrawer.ts";
 
 function LeftSideDrawer() {
   const { isOpen, dispatchCloseDrawer } = useLeftDrawer();
 
   const navigate = useNavigate();
 
-  const navigateTo = (route) => {
-    navigate(route);
-  };
-
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={dispatchCloseDrawer}>
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigateTo("/books")}>
+          <ListItemButton onClick={() => navigate("/books")}>
             <ListItemIcon>
               <Book />
             </ListItemIcon>
@@ -35,7 +31,7 @@ function LeftSideDrawer() {
         </ListItem>
 
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigateTo("/tasks")}>
+          <ListItemButton onClick={() => navigate("/tasks")}>
             <ListItemIcon>
               <Task />
             </ListItemIcon>
@@ -46,7 +42,7 @@ function LeftSideDrawer() {
       <Divider />
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigateTo("/settings")}>
+          <ListItemButton onClick={() => navigate("/settings")}>
             <ListItemIcon>
               <Settings />
             </ListItemIcon>

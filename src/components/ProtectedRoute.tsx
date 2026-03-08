@@ -1,7 +1,13 @@
-import useAuth from "../hooks/useAuth.js";
 import { Navigate } from "react-router";
+import type { ReactNode } from "react";
 
-function ProtectedRoute({ children }) {
+import useAuth from "../hooks/useAuth.ts";
+
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
+
+function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {

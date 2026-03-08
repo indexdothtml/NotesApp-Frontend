@@ -3,14 +3,13 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router/dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { store } from "./store/store.js";
 import { Provider as ReduxProvider } from "react-redux";
 
+import { store } from "./store/store.ts";
 import "./index.css";
-import App from "./App.jsx";
-import ErrorBoundary from "./components/ErrorBoundary.jsx";
-import Error from "./components/Error.jsx";
-import router from "./routes.jsx";
+import ErrorBoundary from "./components/ErrorBoundary.tsx";
+import Error from "./components/Error.tsx";
+import router from "./routes.tsx";
 
 const theme = createTheme({
   colorSchemes: {
@@ -18,15 +17,13 @@ const theme = createTheme({
   },
 });
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ErrorBoundary fallback={<Error />}>
       <ThemeProvider theme={theme} defaultMode="dark">
         <CssBaseline />
         <ReduxProvider store={store}>
-          <RouterProvider router={router}>
-            <App />
-          </RouterProvider>
+          <RouterProvider router={router} />
         </ReduxProvider>
       </ThemeProvider>
     </ErrorBoundary>

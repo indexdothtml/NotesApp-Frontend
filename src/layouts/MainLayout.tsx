@@ -14,12 +14,17 @@ import {
   Laptop,
 } from "@mui/icons-material";
 import { useNavigate, NavLink } from "react-router";
+import type { ReactNode } from "react";
 
-import useAuth from "../hooks/useAuth.js";
-import useLeftDrawer from "../hooks/useLeftDrawer.js";
-import LeftSideDrawer from "../components/LeftSideDrawer.jsx";
+import LeftSideDrawer from "../components/LeftSideDrawer.tsx";
+import useAuth from "../hooks/useAuth.ts";
+import useLeftDrawer from "../hooks/useLeftDrawer.ts";
 
-function MainLayout({ children }) {
+interface MainLayoutProps {
+  children: ReactNode;
+}
+
+function MainLayout({ children }: MainLayoutProps) {
   const { isAuthenticated } = useAuth();
 
   const navigate = useNavigate();

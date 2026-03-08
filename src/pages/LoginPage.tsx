@@ -2,16 +2,21 @@ import { TextField, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router";
 
-import AuthLayout from "../layouts/AuthLayout.jsx";
+import AuthLayout from "../layouts/AuthLayout.tsx";
+
+type FormValues = {
+  identifier: string;
+  password: string;
+};
 
 function LoginPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>();
 
-  const onSubmit = (data) => console.log(`data : ${data}`);
+  const onSubmit = (data: FormValues) => console.log(`data : ${data}`);
   //TODO: call api service for login.
 
   return (
@@ -63,7 +68,9 @@ function LoginPage() {
         <Button
           variant="outlined"
           type="submit"
-          disabled={errors.identifier || errors.password}
+          disabled={
+            errors.identifier === undefined || errors.password === undefined
+          }
         >
           Login
         </Button>

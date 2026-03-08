@@ -1,74 +1,86 @@
 {
   "data": [
     {
-      "_id": "1",
-      "name": "To Kill a Mockingbird",
+      "id": 1,
+      "chapterName": "Chapter 1: A Quiet Beginning",
+      "totalPages": 22,
       "createdAt": "2026-01-05T10:00:00",
       "updatedAt": "2026-02-10T14:30:00"
     },
     {
-      "_id": "2",
-      "name": "1984",
+      "id": 2,
+      "chapterName": "Chapter 2: Shadows of Control",
+      "totalPages": 28,
       "createdAt": "2026-01-06T11:15:00",
       "updatedAt": "2026-02-12T09:45:00"
     },
     {
-      "_id": "3",
-      "name": "Pride and Prejudice",
+      "id": 3,
+      "chapterName": "Chapter 3: A Ball at Netherfield",
+      "totalPages": 35,
       "createdAt": "2026-01-07T09:20:00",
       "updatedAt": "2026-02-14T16:00:00"
     },
     {
-      "_id": "4",
-      "name": "The Great Gatsby",
+      "id": 4,
+      "chapterName": "Chapter 4: The Green Light",
+      "totalPages": 18,
       "createdAt": "2026-01-08T13:40:00",
       "updatedAt": "2026-02-15T18:25:00"
     },
     {
-      "_id": "5",
-      "name": "Moby-Dick",
+      "id": 5,
+      "chapterName": "Chapter 5: The Whale Hunt",
+      "totalPages": 42,
       "createdAt": "2026-01-09T08:10:00",
       "updatedAt": "2026-02-16T12:50:00"
     },
     {
-      "_id": "6",
-      "name": "War and Peace",
+      "id": 6,
+      "chapterName": "Chapter 6: The Rostov Family",
+      "totalPages": 50,
       "createdAt": "2026-01-10T15:00:00",
       "updatedAt": "2026-02-18T20:30:00"
     },
     {
-      "_id": "7",
-      "name": "Crime and Punishment",
+      "id": 7,
+      "chapterName": "Chapter 7: Raskolnikov’s Confession",
+      "totalPages": 33,
       "createdAt": "2026-01-11T17:25:00",
       "updatedAt": "2026-02-20T21:45:00"
     },
     {
-      "_id": "8",
-      "name": "The Catcher in the Rye",
+      "id": 8,
+      "chapterName": "Chapter 8: Holden’s Wanderings",
+      "totalPages": 25,
       "createdAt": "2026-01-12T07:55:00",
       "updatedAt": "2026-02-22T10:10:00"
     },
     {
-      "_id": "9",
-      "name": "Brave New World",
+      "id": 9,
+      "chapterName": "Chapter 9: The World State",
+      "totalPages": 30,
       "createdAt": "2026-01-13T12:35:00",
       "updatedAt": "2026-02-24T15:55:00"
     },
     {
-      "_id": "10",
-      "name": "The Hobbit",
+      "id": 10,
+      "chapterName": "Chapter 10: An Unexpected Journey",
+      "totalPages": 27,
       "createdAt": "2026-01-14T14:45:00",
       "updatedAt": "2026-02-25T19:20:00"
     },
     {
-      "_id": "11",
-      "name": "Jane Eyre",
+      "id": 11,
+      "chapterName": "Chapter 11: Thornfield Secrets",
+      "totalPages": 31,
       "createdAt": "2026-01-15T09:05:00",
       "updatedAt": "2026-02-26T11:40:00"
     },
     {
-      "_id": "12",
-      "name": "Wuthering Heights",
+      "id": 12,
+      "chapterName": "Chapter 12: Stormy Heights",
+      "totalPages": 29,
       "createdAt": "2026-01-16T16:15:00",
       "updatedAt": "2026-02-28T22:00:00"
     }
