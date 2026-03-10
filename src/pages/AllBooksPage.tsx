@@ -12,14 +12,14 @@ import useAuth from "../hooks/useAuth.ts";
 import type { ItemDetails, InputCardFormValues } from "../types/types.ts";
 
 type BookData = {
-  id: number;
+  id: string;
   bookName: string;
   totalChapters: number;
   createdAt: string;
   updatedAt: string;
 };
 
-function BooksPage() {
+function AllBooksPage() {
   const { dispatchOpenModal } = useModal();
 
   const { userData } = useAuth();
@@ -93,4 +93,4 @@ function BooksPage() {
   );
 }
 
-export default BooksPage;
+export default AllBooksPage;

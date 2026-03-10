@@ -5,9 +5,10 @@ import LoginPage from "./pages/LoginPage.tsx";
 import SignupPage from "./pages/SignupPage.tsx";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage.tsx";
 import ResetPasswordPage from "./pages/ResetPasswordPage.tsx";
-import BooksPage from "./pages/BooksPage.tsx";
+import AllBooksPage from "./pages/AllBooksPage.tsx";
 import BookPage from "./pages/BookPage.tsx";
 import ChapterPage from "./pages/ChapterPage.tsx";
+import ShowPage from "./pages/ShowPage.tsx";
 import TasksPage from "./pages/TasksPage.tsx";
 import SettingsPage from "./pages/SettingsPage.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
         path: "/books",
         element: (
           <ProtectedRoute>
-            <BooksPage />
+            <AllBooksPage />
           </ProtectedRoute>
         ),
       },
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <ChapterPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/books/:bookId/chapters/:chapterId/pages/:pageId",
+        element: (
+          <ProtectedRoute>
+            <ShowPage />
           </ProtectedRoute>
         ),
       },

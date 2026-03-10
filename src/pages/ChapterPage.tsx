@@ -12,7 +12,7 @@ import useModal from "../hooks/useModal.ts";
 import type { InputCardFormValues, ItemDetails } from "../types/types.ts";
 
 type PageData = {
-  id: number;
+  id: string;
   pageNumber: number;
   contentPreview: string;
   createdAt: string;
@@ -30,13 +30,35 @@ function ChapterPage() {
     totalItems: 0,
   });
 
+  const [bookName, setBookName] = useState("");
+
+  const [chapterName, setChapterName] = useState("");
+
   // For testing purpose fetching using dummy json file.
   useEffect(() => {
+    fetch("http://localhost:5173/booksData.json")
+      .then((response) => response.json())
+      .then((data) => {
+        const book = data?.data?.find((book: any) => book?.id === bookId);
+        // console.log(data.data.find((book) => book.id === bookId));
+        setBookName(book?.bookName);
+      });
+
+    fetch("http://localhost:5173/chaptersData.json")
+      .then((response) => response.json())
+      .then((data) => {
+        const chapter = data?.data?.find(
+          (chapter: any) => chapter?.id === chapterId,
+        );
+        // console.log(data.data.find((book) => book.id === bookId));
+        setChapterName(chapter?.chapterName);
+      });
+
     // Fetch books using bookId
     fetch("http://localhost:5173/pagesData.json")
       .then((response) => response.json())
       .then((data) => setPageDetails(data));
-  }, [chapterId]);
+  }, [chapterId, bookId]);
 
   const handleCreateNewPage = useCallback((data: InputCardFormValues) => {
     console.log(`New page: ${data.name}`);
@@ -56,13 +78,13 @@ function ChapterPage() {
               to={`/books/${bookId}`}
               className="hover:underline text-inherit font-bold"
             >
-              {bookId}
+              {bookName}
             </Link>
             <Link
-              to={`/books/${bookId}/${chapterId}`}
+              to={`/books/${bookId}/chapters/${chapterId}`}
               className="hover:underline text-inherit"
             >
-              {chapterId}
+              {chapterName}
             </Link>
           </Breadcrumbs>
 
@@ -75,7 +97,7 @@ function ChapterPage() {
           </Button>
         </div>
 
-        <h1 className="ml-4 font-semibold text-2xl">The Project Hail Mary</h1>
+        <h1 className="ml-4 font-semibold text-2xl">{chapterName}</h1>
 
         {/* Show all Chapters of the Book */}
         <PaginatedItems totalItems={pageDetails.totalItems}>
