@@ -6,13 +6,3 @@ export type UserData = {
   createdAt: string;
   updatedAt: string;
 };
-
-export type InputCardFormValues = {
-  name: string;
-};
-
-export type ItemDetails<T> = {
-  data: T[] | null;
-  itemCount: number;
-  totalItems: number;
-};

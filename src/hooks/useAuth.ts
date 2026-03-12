@@ -1,8 +1,8 @@
-import { login, logout } from "../features/authSlice.ts";
-import { useAppSelector, useAppDispatch } from "./useStore.ts";
-import type { UserData } from "../types/types.ts";
+import { login, logout } from "@/features/authSlice";
+import { useAppSelector, useAppDispatch } from "@/hooks/useStore";
+import type { UserData } from "@/types/types";
 
-function useAuth() {
+export function useAuth() {
   // Get authentication details.
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
@@ -29,5 +29,3 @@ function useAuth() {
     dispatchLogout,
   };
 }
-
-export default useAuth;

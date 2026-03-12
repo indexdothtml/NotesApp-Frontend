@@ -3,7 +3,7 @@ interface ErrorProps {
   errorMessage?: string;
 }
 
-function Error({
+export function Error({
   statusCode = 500,
   errorMessage = "Something Went Wrong!",
 }: ErrorProps) {
@@ -16,5 +16,3 @@ function Error({
     </div>
   );
 }
-
-export default Error;

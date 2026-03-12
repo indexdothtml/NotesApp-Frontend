@@ -1,19 +1,14 @@
 import { createBrowserRouter } from "react-router";
 
-import App from "./App.jsx";
-import LoginPage from "./pages/LoginPage.tsx";
-import SignupPage from "./pages/SignupPage.tsx";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage.tsx";
-import ResetPasswordPage from "./pages/ResetPasswordPage.tsx";
-import AllBooksPage from "./pages/AllBooksPage.tsx";
-import BookPage from "./pages/BookPage.tsx";
-import ChapterPage from "./pages/ChapterPage.tsx";
-import ShowPage from "./pages/ShowPage.tsx";
-import TasksPage from "./pages/TasksPage.tsx";
-import SettingsPage from "./pages/SettingsPage.tsx";
-import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import { App } from "@/app";
+import { ProtectedRoute } from "@/components/protected-route";
+import { LoginPage } from "@/pages/auth/login-page";
+import { SignupPage } from "@/pages/auth/signup-page";
+import { ForgotPasswordPage } from "@/pages/auth/forgot-password-page";
+import { ResetPasswordPage } from "@/pages/auth/reset-password-page";
+import { AllNotes } from "@/pages/notes/all-notes";
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
@@ -39,55 +34,13 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/books",
+        path: "/notes",
         element: (
-          <ProtectedRoute>
-            <AllBooksPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/books/:bookId",
-        element: (
-          <ProtectedRoute>
-            <BookPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/books/:bookId/chapters/:chapterId",
-        element: (
-          <ProtectedRoute>
-            <ChapterPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/books/:bookId/chapters/:chapterId/pages/:pageId",
-        element: (
-          <ProtectedRoute>
-            <ShowPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/tasks",
-        element: (
-          <ProtectedRoute>
-            <TasksPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/settings",
-        element: (
-          <ProtectedRoute>
-            <SettingsPage />
-          </ProtectedRoute>
+          // <ProtectedRoute>
+          <AllNotes />
+          // </ProtectedRoute>
         ),
       },
     ],
   },
 ]);
-
-export default router;

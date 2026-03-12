@@ -1,14 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import authReducer from "../features/authSlice.ts";
-import leftDrawerReducer from "../features/leftDrawerSlice.ts";
-import modalReducer from "../features/modalSlice.js";
+import authReducer from "@/features/authSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    leftDrawer: leftDrawerReducer,
-    modal: modalReducer,
   },
 });
 
