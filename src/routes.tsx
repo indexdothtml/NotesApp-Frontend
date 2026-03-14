@@ -7,6 +7,7 @@ import { SignupPage } from "@/pages/auth/signup-page";
 import { ForgotPasswordPage } from "@/pages/auth/forgot-password-page";
 import { ResetPasswordPage } from "@/pages/auth/reset-password-page";
 import { AllNotes } from "@/pages/notes/all-notes";
+import { ShowNote } from "@/pages/notes/show-note";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,14 @@ export const router = createBrowserRouter([
         element: (
           // <ProtectedRoute>
           <AllNotes />
+          // </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/notes/:noteId",
+        element: (
+          // <ProtectedRoute>
+          <ShowNote />
           // </ProtectedRoute>
         ),
       },

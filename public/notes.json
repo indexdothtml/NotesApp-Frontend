@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "name": "Meeting Notes",
+    "content": "Discussed project milestones and deadlines.",
+    "createdAt": "2026-03-01T10:00:00Z",
+    "updatedAt": "2026-03-01T12:00:00Z"
+  },
+  {
+    "id": "2",
+    "name": "Shopping List",
+    "content": "Milk, Bread, Eggs, Coffee",
+    "createdAt": "2026-03-02T08:30:00Z",
+    "updatedAt": "2026-03-02T09:00:00Z"
+  },
+  {
+    "id": "3",
+    "name": "Workout Plan",
+    "content": "Monday: Cardio, Tuesday: Strength Training",
+    "createdAt": "2026-03-03T07:15:00Z",
+    "updatedAt": "2026-03-03T07:45:00Z"
+  },
+  {
+    "id": "4",
+    "name": "Book Ideas",
+    "content": "Outline for sci-fi novel.",
+    "createdAt": "2026-03-04T11:20:00Z",
+    "updatedAt": "2026-03-04T11:50:00Z"
+  },
+  {
+    "id": "5",
+    "name": "Recipe",
+    "content": "Pasta with tomato basil sauce.",
+    "createdAt": "2026-03-05T14:00:00Z",
+    "updatedAt": "2026-03-05T14:30:00Z"
+  },
+  {
+    "id": "6",
+    "name": "Travel Plans",
+    "content": "Visit Goa in April, book flights.",
+    "createdAt": "2026-03-06T09:45:00Z",
+    "updatedAt": "2026-03-06T10:15:00Z"
+  },
+  {
+    "id": "7",
+    "name": "Learning Goals",
+    "content": "Complete TypeScript course by end of March.",
+    "createdAt": "2026-03-07T16:10:00Z",
+    "updatedAt": "2026-03-07T16:40:00Z"
+  },
+  {
+    "id": "8",
+    "name": "Gift Ideas",
+    "content": "Watch, Perfume, Books for birthday.",
+    "createdAt": "2026-03-08T13:25:00Z",
+    "updatedAt": "2026-03-08T13:55:00Z"
+  },
+  {
+    "id": "9",
+    "name": "Daily Journal",
+    "content": "Reflections on productivity and focus.",
+    "createdAt": "2026-03-09T20:00:00Z",
+    "updatedAt": "2026-03-09T20:30:00Z"
+  },
+  {
+    "id": "10",
+    "name": "Ideas for App",
+    "content": "Note-taking app with offline sync.",
+    "createdAt": "2026-03-10T18:45:00Z",
+    "updatedAt": "2026-03-10T19:15:00Z"
+  }
+]

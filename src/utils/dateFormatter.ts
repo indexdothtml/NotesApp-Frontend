@@ -1,8 +1,14 @@
-function formatDate(date: string) {
+export function formatDate(isoDateTimeFormatString: string) {
   try {
-    const formatter = Intl.DateTimeFormat("en-IN");
+    const date = new Date(isoDateTimeFormatString);
 
-    return formatter.format(new Date(date));
+    const formattedDate = date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "2-digit",
+      year: "numeric",
+    });
+
+    return formattedDate;
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);
@@ -11,5 +17,3 @@ function formatDate(date: string) {
     }
   }
 }
-
-export default formatDate;
