@@ -1,3 +1,5 @@
+import { FileQuestionMark } from "lucide-react";
+
 import { Separator } from "@/components/ui/separator";
 import {
   Empty,
@@ -9,7 +11,6 @@ import {
 import { NoteCard } from "@/components/note-card";
 import { AddNote } from "@/pages/notes/add-note";
 import { MoreNotes } from "@/pages/notes/more-notes";
-import { FileQuestionMark } from "lucide-react";
 
 export function AllNotes() {
   const notes = [

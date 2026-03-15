@@ -1,3 +1,5 @@
+import { CircleEllipsis } from "lucide-react";
+
 import {
   Dialog,
   DialogContent,
@@ -9,7 +11,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { NoteCard } from "@/components/note-card";
-import { CircleEllipsis } from "lucide-react";
 
 export function MoreNotes() {
   const notes = [
@@ -92,7 +93,7 @@ export function MoreNotes() {
         <ScrollArea className="h-60">
           <div className="flex flex-col gap-2">
             {notes.map((note) => (
-              <NoteCard note={note} position="left" />
+              <NoteCard key={note.id} note={note} position="left" />
             ))}
           </div>
         </ScrollArea>

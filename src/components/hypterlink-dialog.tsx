@@ -1,63 +1,63 @@
-import { useState } from "react";
+import { type ReactElement, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { FilePlus } from "lucide-react";
 
 import {
   Dialog,
-  DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
+  DialogContent,
   DialogTrigger,
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import type { Hyperlink } from "@/types/types";
 
-type FormValues = {
-  name: string;
+type HyperlinkDialogProps = {
+  children: ReactElement<typeof Button>;
+  formSubmitHandler: ({ href }: Hyperlink) => boolean;
 };
 
-export function AddNote() {
-  const { register, handleSubmit } = useForm<FormValues>();
+export function HyperlinkDialog({
+  children,
+  formSubmitHandler,
+}: HyperlinkDialogProps) {
+  const { register, handleSubmit } = useForm<Hyperlink>();
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleServiceCall: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const onFormSubmit: SubmitHandler<Hyperlink> = ({ href }) => {
+    formSubmitHandler({ href });
     setIsOpen(false);
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button variant="ghost" className="cursor-pointer">
-          <FilePlus /> New note
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
-          <DialogTitle>Create new note</DialogTitle>
+          <DialogTitle>Add hyperlink</DialogTitle>
           <DialogDescription>
-            Make a new note. Click save when you&apos;re done.
+            Select text and enter below href to create link.
           </DialogDescription>
         </DialogHeader>
+
         <form
-          onSubmit={handleSubmit(handleServiceCall)}
+          onSubmit={handleSubmit(onFormSubmit)}
           className="flex flex-col gap-4"
         >
           <div className="grid gap-2">
-            <Label htmlFor="name">Note name</Label>
+            <Label htmlFor="href">href</Label>
             <Input
-              id="name"
+              id="href"
               type="text"
-              placeholder="Travel list"
-              {...register("name", { required: true })}
+              placeholder="https://www.example.com"
+              {...register("href", { required: true })}
             />
           </div>
-
           <DialogFooter>
             <DialogClose asChild>
               <Button variant="ghost" className="cursor-pointer">

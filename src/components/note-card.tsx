@@ -6,7 +6,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Button } from "@/components/ui/button";
-import { formatDate } from "@/utils/dateFormatter";
+import { formatDate } from "@/lib/utils";
 
 type Note = {
   id: string;

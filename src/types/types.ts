@@ -14,3 +14,8 @@ export type Note = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type Hyperlink = {
+  href: string;
+  target?: string;
+};

@@ -30,10 +30,67 @@
   .ProseMirror ol {
     @apply list-decimal pl-6;
   }
+
+  /* Tiptap editor add style blockquote */
+  .ProseMirror blockquote {
+    @apply border-l-4 border-solid border-gray-50 mt-6 mb-6 pl-4;
+  }
+
+  /* Tiptap editor add style code */
+  .ProseMirror code {
+    @apply bg-muted p-0.5 rounded-sm;
+  }
+
+  /* Tiptap editor add style pre */
+  .ProseMirror pre {
+    @apply rounded-sm mt-6 mb-6 pt-3 pb-3 pl-4 pr-4 bg-accent;
+  }
+
+  /* Tiptap editor add style pre code */
+  .ProseMirror pre code {
+    @apply bg-inherit p-0;
+  }
+
+  /* Tiptap editor add style headers */
+  .ProseMirror h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply leading-1 mt-10 text-pretty;
+  }
+
+  .ProseMirror h1,
+  h2 {
+    @apply mt-14 mb-6;
+  }
+
+  .ProseMirror h1 {
+    @apply text-[1.4rem];
+  }
+
+  .ProseMirror h2 {
+    @apply text-[1.2rem];
+  }
+
+  .ProseMirror h3 {
+    @apply text-[1.1rem];
+  }
+
+  .ProseMirror h4,
+  h5,
+  h6 {
+    @apply text-[1rem];
+  }
+
+  /* Tiptap editor add style hyperlink */
+  .ProseMirror a {
+    @apply underline underline-offset-2 text-blue-300;
+  }
 }
 
 :root {
-
   --background: oklch(1 0 0);
 
   --foreground: oklch(0.145 0 0);
@@ -100,7 +157,6 @@
 }
 
 .dark {
-
   --background: oklch(0.145 0 0);
 
   --foreground: oklch(0.985 0 0);
@@ -113,7 +169,7 @@
 
   --popover-foreground: oklch(0.985 0 0);
 
-  --primary: oklch(0.87 0.00 0);
+  --primary: oklch(0.87 0 0);
 
   --primary-foreground: oklch(0.205 0 0);
 
@@ -165,8 +221,7 @@
 }
 
 @theme inline {
-
-  --font-sans: 'Geist Variable', sans-serif;
+  --font-sans: "Geist Variable", sans-serif;
 
   --color-sidebar-ring: var(--sidebar-ring);
 
