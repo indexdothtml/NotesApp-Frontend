@@ -37,17 +37,17 @@ export const router = createBrowserRouter([
       {
         path: "/notes",
         element: (
-          // <ProtectedRoute>
-          <AllNotes />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <AllNotes />
+          </ProtectedRoute>
         ),
       },
       {
         path: "/notes/:noteId",
         element: (
-          // <ProtectedRoute>
-          <ShowNote />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <ShowNote />
+          </ProtectedRoute>
         ),
       },
     ],

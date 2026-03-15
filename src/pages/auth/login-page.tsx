@@ -1,5 +1,6 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -13,6 +14,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
+import { userLoginService } from "@/services/authServices";
+import { useAuth } from "@/hooks/useAuth";
 
 type FormValues = {
   identifier: string;
@@ -20,11 +24,30 @@ type FormValues = {
 };
 
 export function LoginPage() {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const navigate = useNavigate();
 
-  const handleServiceCall: SubmitHandler<FormValues> = (data) =>
-    console.log(`data : ${data}`);
-  //TODO: call api service for login.
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<FormValues>();
+
+  const { dispatchLogin } = useAuth();
+
+  const handleServiceCall: SubmitHandler<FormValues> = async ({
+    identifier,
+    password,
+  }) => {
+    const response = await userLoginService(identifier, password);
+
+    if (response.success) {
+      toast.success("Login Successful!", { position: "top-center" });
+      dispatchLogin(response.data);
+      navigate("/notes");
+    } else {
+      toast.error("Login Failed!", { position: "top-center" });
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(handleServiceCall)}>
@@ -74,9 +97,12 @@ export function LoginPage() {
           <Button
             type="submit"
             variant="default"
+            aria-label="Login"
+            disabled={isSubmitting}
             className="w-full cursor-pointer hover:bg-accent-foreground"
           >
-            Login
+            {isSubmitting && <Spinner />}
+            {isSubmitting ? "Fetching details..." : "Login"}
           </Button>
         </CardFooter>
       </Card>
