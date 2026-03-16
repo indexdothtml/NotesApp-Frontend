@@ -24,7 +24,7 @@ export function NavBar() {
       toast.success("Logout Successful!", { position: "top-center" });
       dispatchLogout();
       setIsLoggingOut(false);
-      navigate("/");
+      navigate("/login");
     } else {
       toast.error("Logout Failed!", { position: "top-center" });
       setIsLoggingOut(false);
@@ -47,6 +47,7 @@ export function NavBar() {
             aria-label="Logout"
             disabled={isLoggingOut}
             onClick={handleLogout}
+            className="cursor-pointer"
           >
             {isLoggingOut && <Spinner />}
             {isLoggingOut ? "Logging out..." : "Logout"}

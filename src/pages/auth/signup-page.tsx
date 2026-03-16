@@ -1,5 +1,6 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -13,6 +14,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
+import { userSignupService, userLoginService } from "@/services/authServices";
+import { useAuth } from "@/hooks/useAuth";
 
 type FormValues = {
   name: string;
@@ -22,11 +26,40 @@ type FormValues = {
 };
 
 export function SignupPage() {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<FormValues>();
 
-  const handleServiceCall: SubmitHandler<FormValues> = (data) =>
-    console.log(data);
-  //TODO: call api service for login.
+  const navigate = useNavigate();
+
+  const { dispatchLogin } = useAuth();
+
+  const handleServiceCall: SubmitHandler<FormValues> = async ({
+    name,
+    username,
+    email,
+    password,
+  }) => {
+    const response = await userSignupService(name, username, email, password);
+
+    if (response.success) {
+      const response = await userLoginService(email, password);
+
+      if (response.success) {
+        toast.success("Account Created Successfully!", {
+          position: "top-center",
+        });
+        dispatchLogin(response.data);
+        navigate("/notes");
+      } else {
+        navigate("/login");
+      }
+    } else {
+      toast.error("Account Creation Failed!", { position: "top-center" });
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(handleServiceCall)}>
@@ -89,8 +122,10 @@ export function SignupPage() {
             type="submit"
             variant="default"
             className="w-full cursor-pointer hover:bg-accent-foreground"
+            disabled={isSubmitting}
           >
-            Create account
+            {isSubmitting && <Spinner />}
+            {isSubmitting ? "Creating account..." : "Create account"}
           </Button>
         </CardFooter>
       </Card>
