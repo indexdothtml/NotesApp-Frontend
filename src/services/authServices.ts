@@ -67,6 +67,18 @@ export async function userForgotPasswordService(email: string) {
   };
 }
 
+export async function userValidatePasswordResetTokenService(token: string) {
+  await new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(`${token}`);
+    }, 3000),
+  );
+  return {
+    success: true,
+    data: null,
+  };
+}
+
 export async function userResetPasswordService(newPassword: string) {
   await new Promise((resolve) =>
     setTimeout(() => {

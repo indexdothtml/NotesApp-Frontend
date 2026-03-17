@@ -32,13 +32,12 @@ export function ForgotPasswordPage() {
     const response = await userForgotPasswordService(email);
 
     if (response.success) {
-      toast.info("You will receive password reset link on this email.", {
-        position: "top-center",
-      });
-    } else {
-      toast.error("Failed to sent password reset link on this email.", {
-        position: "top-center",
-      });
+      toast.info(
+        "You will receive password reset link, if an account exist with this email.",
+        {
+          position: "top-center",
+        },
+      );
     }
   };
 
