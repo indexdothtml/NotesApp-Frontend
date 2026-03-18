@@ -9,8 +9,9 @@ import {
   EmptyDescription,
 } from "@/components/ui/empty";
 import { NoteCard } from "@/components/note-card";
-import { AddNote } from "@/pages/notes/add-note";
-import { MoreNotes } from "@/pages/notes/more-notes";
+import { NotesFolderSelector } from "@/components/notes-folder-selector";
+import { AddNote } from "@/components/add-note";
+import { MoreNotes } from "@/components/more-notes";
 
 export function AllNotes() {
   const notes = [
@@ -76,24 +77,31 @@ export function AllNotes() {
     },
   ];
 
-  //   const notes: string[] = [];
+  const handleSelectChange = (value: string) => {
+    console.log(`selected: ${value}`);
+  };
 
   return (
     <div className="w-4xl flex flex-col items-center m-auto mt-8 gap-4">
-      <div className="flex items-end gap-12">
-        <div className="pl-2.5 gap-4">
+      <div className="flex flex-col gap-4">
+        <div className="pl-2.5 flex flex-col gap-1">
           <h1 className="text-4xl font-semibold">Notes</h1>
           <h2 className="opacity-65">
             Here you can find all of your notes from selected folder.
           </h2>
         </div>
-        <AddNote />
+        <div className="flex">
+          <NotesFolderSelector userId="1" onSelectChange={handleSelectChange} />
+          <div>
+            <AddNote />
+          </div>
+        </div>
       </div>
       <Separator />
       {notes && notes.length != 0 ? (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 justify-items-start gap-4">
           {notes.map((note) => (
-            <NoteCard note={note} />
+            <NoteCard key={note.id} note={note} />
           ))}
           <MoreNotes />
         </div>

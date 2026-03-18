@@ -53,16 +53,16 @@
 
   /* Tiptap editor add style headers */
   .ProseMirror h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  .ProseMirror h2,
+  .ProseMirror h3,
+  .ProseMirror h4,
+  .ProseMirror h5,
+  .ProseMirror h6 {
     @apply leading-1 mt-10 text-pretty;
   }
 
   .ProseMirror h1,
-  h2 {
+  .ProseMirror h2 {
     @apply mt-14 mb-6;
   }
 
@@ -79,8 +79,8 @@
   }
 
   .ProseMirror h4,
-  h5,
-  h6 {
+  .ProseMirror h5,
+  .ProseMirror h6 {
     @apply text-[1rem];
   }
 

@@ -19,3 +19,39 @@ export async function getNote(noteId: string) {
     }
   }
 }
+
+export async function getAllNotesFolders(userId: string) {
+  await new Promise((resolve) =>
+    setTimeout(() => resolve(`all folders of user ${userId}`), 3000),
+  );
+
+  return {
+    success: true,
+    data: [
+      {
+        id: "1",
+        name: "Personal Projects",
+      },
+      {
+        id: "2",
+        name: "Office Work",
+      },
+      {
+        id: "3",
+        name: "Trip Plans",
+      },
+    ],
+  };
+}
+
+export async function addNewNotesFolder(name: string) {
+  await new Promise((resolve) => setTimeout(() => resolve(`new folder`), 3000));
+
+  return {
+    success: true,
+    data: {
+      id: String(Math.random() * 100),
+      name,
+    },
+  };
+}

@@ -4,7 +4,6 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { NotesSelector } from "@/components/notes-selector";
 import { userLogoutService } from "@/services/authServices";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -33,12 +32,8 @@ export function NavBar() {
 
   return (
     <nav className="flex justify-between items-center p-4 shadow-md">
-      <div className="flex items-center gap-10">
-        <div>
-          <Link to="/">Notiva</Link>
-        </div>
-
-        {isAuthenticated && <NotesSelector />}
+      <div>
+        <Link to="/">Notiva</Link>
       </div>
       <div>
         {isAuthenticated ? (
