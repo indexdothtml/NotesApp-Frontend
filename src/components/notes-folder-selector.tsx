@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { AddNotesFolder } from "@/components/add-notes-folder";
-import { getAllNotesFolders } from "@/services/notesService";
+import { getAllNotesFolders } from "@/services/notesServices";
 
 type NotesSelectorProps = {
   userId: string;

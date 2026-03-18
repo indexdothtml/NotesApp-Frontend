@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
-import { addNewNotesFolder } from "@/services/notesService";
+import { addNewNotesFolder } from "@/services/notesServices";
 
 type FormValues = {
   name: string;
