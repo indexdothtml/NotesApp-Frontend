@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FileQuestionMark } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
@@ -12,73 +13,38 @@ import { NoteCard } from "@/components/note-card";
 import { NotesFolderSelector } from "@/components/notes-folder-selector";
 import { AddNote } from "@/components/add-note";
 import { MoreNotes } from "@/components/more-notes";
+import { SkeletonNotes } from "@/components/skeleton-notes";
+import { getAllNotes } from "@/services/notesServices";
+import { useAuth } from "@/hooks/useAuth";
+import type { NotePreview } from "@/types/types";
 
 export function AllNotes() {
-  const notes = [
-    {
-      id: "1",
-      name: "MeetingNotes-Q1-nl",
-      previewContent: "Discussed quarterly goals and team updates.",
-      createdAt: "2026-01-15T10:30:00Z",
-    },
-    {
-      id: "2",
-      name: "MeetingNotes-Q1-fr",
-      previewContent: "Résumé de la réunion trimestrielle.",
-      createdAt: "2026-01-15T11:00:00Z",
-    },
-    {
-      id: "3",
-      name: "MeetingNotes-Q1-en",
-      previewContent: "Key highlights from Q1 meeting.",
-      createdAt: "2026-01-15T09:45:00Z",
-    },
-    {
-      id: "4",
-      name: "MeetingNotes-Q1-de",
-      previewContent: "Besprechung der Quartalsziele.",
-      createdAt: "2026-01-15T12:15:00Z",
-    },
-    {
-      id: "5",
-      name: "ProjectPlan-Alpha-nl",
-      previewContent: "Projectplan voor Alpha fase.",
-      createdAt: "2026-02-01T08:20:00Z",
-    },
-    {
-      id: "6",
-      name: "ProjectPlan-Alpha-fr",
-      previewContent: "Plan du projet Alpha.",
-      createdAt: "2026-02-01T09:00:00Z",
-    },
-    {
-      id: "7",
-      name: "ProjectPlan-Alpha-en",
-      previewContent: "Detailed roadmap for Alpha project.",
-      createdAt: "2026-02-01T07:45:00Z",
-    },
-    {
-      id: "8",
-      name: "ProjectPlan-Alpha-de",
-      previewContent: "Projektplan für Alpha-Phase.",
-      createdAt: "2026-02-01T10:10:00Z",
-    },
-    {
-      id: "9",
-      name: "BudgetReport-2026-nl",
-      previewContent: "Financieel overzicht voor 2026.",
-      createdAt: "2026-03-05T14:00:00Z",
-    },
-    {
-      id: "10",
-      name: "BudgetReport-2026-fr",
-      previewContent: "Rapport budgétaire pour 2026.",
-      createdAt: "2026-03-05T14:30:00Z",
-    },
-  ];
+  const { isAuthenticated, userData } = useAuth();
 
-  const handleSelectChange = (value: string) => {
-    console.log(`selected: ${value}`);
+  const [selectedFolderId, setSelectedFolderId] = useState<string | undefined>(
+    undefined,
+  );
+
+  const [notes, setNotes] = useState<NotePreview[]>([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSelectChange = async (value: string) => {
+    setSelectedFolderId(value);
+
+    if (isAuthenticated && userData) {
+      setIsLoading(true);
+
+      const response = await getAllNotes(userData.id, value);
+
+      if (response.success) {
+        setNotes(response.data);
+      } else {
+        setNotes([]);
+      }
+
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -91,19 +57,28 @@ export function AllNotes() {
           </h2>
         </div>
         <div className="flex">
-          <NotesFolderSelector userId="1" onSelectChange={handleSelectChange} />
+          <NotesFolderSelector
+            userId={userData?.id}
+            onSelectChange={handleSelectChange}
+          />
           <div>
-            <AddNote />
+            <AddNote
+              userId={userData?.id}
+              folderId={selectedFolderId}
+              setNotes={setNotes}
+            />
           </div>
         </div>
       </div>
       <Separator />
-      {notes && notes.length != 0 ? (
+      {isLoading ? (
+        <SkeletonNotes />
+      ) : notes.length !== 0 ? (
         <div className="grid grid-cols-3 justify-items-start gap-4">
-          {notes.map((note) => (
+          {notes.slice(0, 10).map((note) => (
             <NoteCard key={note.id} note={note} />
           ))}
-          <MoreNotes />
+          <MoreNotes notes={notes} />
         </div>
       ) : (
         <Empty>
@@ -113,8 +88,8 @@ export function AllNotes() {
             </EmptyMedia>
             <EmptyTitle>No Notes To Show Yet</EmptyTitle>
             <EmptyDescription>
-              You haven&apos;t created any note yet. Get started by creating
-              your first note.
+              It seems you haven&apos;t created any note yet or selected correct
+              folder.
             </EmptyDescription>
           </EmptyHeader>
         </Empty>

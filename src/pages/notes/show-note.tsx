@@ -5,7 +5,7 @@ import { ArrowBigLeft, Eye, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SkeletonText } from "@/components/skeleton-text";
 import { TiptapTextEditor } from "@/components/tiptap-text-editor";
-import { getNote } from "@/services/notesService";
+import { getNote } from "@/services/notesServices";
 import type { Note } from "@/types/types";
 import { formatDate } from "@/lib/utils";
 

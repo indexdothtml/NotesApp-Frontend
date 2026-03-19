@@ -23,6 +23,7 @@ type FormValues = {
 };
 
 type AddNotesFolderProps = {
+  userId?: string;
   setNotesFolders: Dispatch<
     SetStateAction<
       {
@@ -33,7 +34,10 @@ type AddNotesFolderProps = {
   >;
 };
 
-export function AddNotesFolder({ setNotesFolders }: AddNotesFolderProps) {
+export function AddNotesFolder({
+  userId,
+  setNotesFolders,
+}: AddNotesFolderProps) {
   const {
     register,
     handleSubmit,
@@ -44,14 +48,16 @@ export function AddNotesFolder({ setNotesFolders }: AddNotesFolderProps) {
 
   const onFormSubmit: SubmitHandler<FormValues> = async ({ name }) => {
     // API response should return newly added folder details like its id and name. So state can update instantly with refetching data.
-    const response = await addNewNotesFolder(name);
+    if (userId) {
+      const response = await addNewNotesFolder(userId, name);
 
-    if (response.success) {
-      // Updating state of folders.
-      setNotesFolders((prev) => [
-        { id: response.data.id, name: response.data.name },
-        ...prev,
-      ]);
+      if (response.success) {
+        // Updating state of folders.
+        setNotesFolders((prev) => [
+          { id: response.data.id, name: response.data.name },
+          ...prev,
+        ]);
+      }
     }
     setIsOpen(false);
   };

@@ -12,7 +12,7 @@ import { AddNotesFolder } from "@/components/add-notes-folder";
 import { getAllNotesFolders } from "@/services/notesServices";
 
 type NotesSelectorProps = {
-  userId: string;
+  userId?: string;
   onSelectChange: (value: string) => void;
 };
 
@@ -26,12 +26,14 @@ export function NotesFolderSelector({
 
   useEffect(() => {
     (async function () {
-      const response = await getAllNotesFolders(userId);
+      if (userId) {
+        const response = await getAllNotesFolders(userId);
 
-      if (response.success) {
-        setNotesFolders(response.data);
-      } else {
-        setNotesFolders([]);
+        if (response.success) {
+          setNotesFolders(response.data);
+        } else {
+          setNotesFolders([]);
+        }
       }
     })();
   }, [userId]);
@@ -56,7 +58,7 @@ export function NotesFolderSelector({
           </SelectGroup>
         </SelectContent>
       </Select>
-      <AddNotesFolder setNotesFolders={setNotesFolders} />
+      <AddNotesFolder userId={userId} setNotesFolders={setNotesFolders} />
     </div>
   );
 }

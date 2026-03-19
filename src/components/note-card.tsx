@@ -7,16 +7,10 @@ import {
 } from "@/components/ui/hover-card";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
-
-type Note = {
-  id: string;
-  name: string;
-  previewContent: string;
-  createdAt: string;
-};
+import type { NotePreview } from "@/types/types";
 
 type NoteCardProps = {
-  note: Note;
+  note: NotePreview;
   position?: "bottom" | "left" | "top" | "right";
 };
 

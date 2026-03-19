@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { FilePlus } from "lucide-react";
 
@@ -15,18 +15,38 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
+import { addNewNote } from "@/services/notesServices";
+import type { NotePreview } from "@/types/types";
 
 type FormValues = {
   name: string;
 };
 
-export function AddNote() {
-  const { register, handleSubmit } = useForm<FormValues>();
+type AddNoteProps = {
+  userId?: string;
+  folderId?: string;
+  setNotes: Dispatch<SetStateAction<NotePreview[]>>;
+};
+
+export function AddNote({ userId, folderId, setNotes }: AddNoteProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<FormValues>();
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleServiceCall: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const handleOnSubmit: SubmitHandler<FormValues> = async ({ name }) => {
+    if (userId && folderId) {
+      const response = await addNewNote(userId, folderId, name);
+
+      if (response.success) {
+        setNotes((prev) => [response.data, ...prev]);
+      }
+    }
+
     setIsOpen(false);
   };
 
@@ -45,7 +65,7 @@ export function AddNote() {
           </DialogDescription>
         </DialogHeader>
         <form
-          onSubmit={handleSubmit(handleServiceCall)}
+          onSubmit={handleSubmit(handleOnSubmit)}
           className="flex flex-col gap-4"
         >
           <div className="grid gap-2">
@@ -64,8 +84,13 @@ export function AddNote() {
                 Cancel
               </Button>
             </DialogClose>
-            <Button type="submit" className="cursor-pointer">
-              Save
+            <Button
+              type="submit"
+              className="cursor-pointer"
+              disabled={isSubmitting}
+            >
+              {isSubmitting && <Spinner />}
+              {isSubmitting ? "Saving..." : "Save"}
             </Button>
           </DialogFooter>
         </form>

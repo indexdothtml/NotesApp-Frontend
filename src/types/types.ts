@@ -15,6 +15,13 @@ export type Note = {
   updatedAt: string;
 };
 
+export type NotePreview = {
+  id: string;
+  name: string;
+  previewContent: string;
+  createdAt: string;
+};
+
 export type Hyperlink = {
   href: string;
   target?: string;
