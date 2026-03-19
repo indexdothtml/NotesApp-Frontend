@@ -1,23 +1,19 @@
-import axios from "axios";
+export async function getNote(userId: string, noteId: string) {
+  await new Promise((response) => setTimeout(() => response("get note"), 3000));
 
-import { env } from "@/envConfig";
-import type { Note } from "@/types/types";
-
-export async function getNote(noteId: string) {
-  try {
-    const response = await axios.get<Note[]>(`${env.api_hostname}/notes.json`);
-
-    const note = response.data.find((note) => note.id == noteId);
-
-    return note;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.log(error.message);
-      console.log(error.response?.data);
-    } else {
-      console.log(error);
-    }
-  }
+  return {
+    success: true,
+    userId,
+    noteId,
+    data: {
+      id: noteId,
+      name: "Meet Note",
+      content:
+        "<p>This is first para</p><p>This is second para</p><p>This is thrid para</p>",
+      createdAt: "2026-03-09T20:00:00Z",
+      updatedAt: "2026-03-09T20:00:00Z",
+    },
+  };
 }
 
 export async function getAllNotesFolders(userId: string) {

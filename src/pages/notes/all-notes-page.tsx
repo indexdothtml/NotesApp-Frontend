@@ -18,7 +18,7 @@ import { getAllNotes } from "@/services/notesServices";
 import { useAuth } from "@/hooks/useAuth";
 import type { NotePreview } from "@/types/types";
 
-export function AllNotes() {
+export function AllNotesPage() {
   const { isAuthenticated, userData } = useAuth();
 
   const [selectedFolderId, setSelectedFolderId] = useState<string | undefined>(
