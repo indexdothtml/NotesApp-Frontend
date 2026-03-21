@@ -69,6 +69,8 @@ export function ShowNotePage() {
             <TiptapTextEditor
               readOnly={isReadOnlyText}
               savedContent={note.content}
+              userId={userData?.id}
+              noteId={noteId}
             />
           </div>
         </>

@@ -88,6 +88,11 @@
   .ProseMirror a {
     @apply underline underline-offset-2 text-blue-300;
   }
+
+  /* Tiptap editor add style placeholder */
+  .ProseMirror p.is-editor-empty:first-child::before {
+    @apply text-gray-600 content-[attr(data-placeholder)] float-left h-0 pointer-events-none;
+  }
 }
 
 :root {
