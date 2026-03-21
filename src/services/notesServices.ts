@@ -37,6 +37,22 @@ export async function updateNote(
   };
 }
 
+export async function deleteNote(userId: string, noteId: string) {
+  await new Promise((resolve) => setTimeout(() => resolve("2"), 3000));
+
+  return {
+    success: true,
+    userId,
+    data: {
+      id: noteId,
+      name: "Meet Note",
+      content: "",
+      createdAt: "2026-03-09T20:00:00Z",
+      updatedAt: "2026-03-09T20:00:00Z",
+    },
+  };
+}
+
 export async function getAllNotesFolders(userId: string) {
   await new Promise((resolve) =>
     setTimeout(() => resolve(`all folders of user ${userId}`), 3000),

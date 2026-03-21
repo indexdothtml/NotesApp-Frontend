@@ -4,12 +4,24 @@ import StarterKit from "@tiptap/starter-kit";
 import { TextStyleKit } from "@tiptap/extension-text-style";
 import { Placeholder } from "@tiptap/extensions";
 import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { TiptapTextEditorMenu } from "@/components/tiptap-text-editor-menu";
-import { updateNote } from "@/services/notesServices";
+import { updateNote, deleteNote } from "@/services/notesServices";
 
 type TiptapTextEditorProps = {
   savedContent?: Content;
@@ -33,7 +45,11 @@ export function TiptapTextEditor({
     content: savedContent, // initial content
   });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const [isSaving, setIsSaving] = useState(false);
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Change editable state.
   useEffect(() => {
@@ -42,7 +58,7 @@ export function TiptapTextEditor({
 
   const handleSave = async () => {
     if (userId && noteId) {
-      setIsLoading(true);
+      setIsSaving(true);
 
       const response = await updateNote(userId, noteId, {
         content: editor.getHTML(),
@@ -54,11 +70,28 @@ export function TiptapTextEditor({
         toast.error("Failed to save.", { position: "top-center" });
       }
 
-      setIsLoading(false);
+      setIsSaving(false);
     }
   };
 
-  const handleDelete = async () => {};
+  const handleDelete = async () => {
+    if (userId && noteId) {
+      setIsDeleting(true);
+
+      const response = await deleteNote(userId, noteId);
+
+      if (response.success) {
+        toast.success(`Note ${response.data.name} deleted successfully!`, {
+          position: "top-center",
+        });
+        navigate("/notes");
+      } else {
+        toast.error("Failed to delete.", { position: "top-center" });
+      }
+
+      setIsDeleting(false);
+    }
+  };
 
   return (
     <>
@@ -71,23 +104,41 @@ export function TiptapTextEditor({
           variant="outline"
           aria-label="Save"
           className="cursor-pointer mt-2"
-          disabled={readOnly || isLoading}
+          disabled={readOnly || isSaving || isDeleting}
           onClick={handleSave}
         >
-          {isLoading && <Spinner />}
-          {isLoading ? "Saving..." : "Save"}
+          {isSaving && <Spinner />}
+          {isSaving ? "Saving..." : "Save"}
         </Button>
 
-        <Button
-          variant="destructive"
-          aria-label="Delete"
-          className="cursor-pointer mt-2"
-          disabled={readOnly || isLoading}
-          onClick={handleDelete}
-        >
-          {isLoading && <Spinner />}
-          {isLoading ? "Deleting..." : "Delete"}
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="destructive"
+              aria-label="Delete"
+              className="cursor-pointer mt-2"
+              disabled={readOnly || isDeleting || isSaving}
+            >
+              {isDeleting && <Spinner />}
+              {isDeleting ? "Deleting..." : "Delete"}
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                note.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleDelete}>
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </>
   );

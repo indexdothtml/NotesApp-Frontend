@@ -3,8 +3,14 @@ import { useParams, Link } from "react-router";
 import { ArrowBigLeft, Eye, Pencil } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { SkeletonShowNote } from "@/components/skeleton-show-note";
 import { TiptapTextEditor } from "@/components/tiptap-text-editor";
+import { EditNoteName } from "@/components/edit-note-name";
 import { getNote } from "@/services/notesServices";
 import { useAuth } from "@/hooks/useAuth";
 import { formatDate } from "@/lib/utils";
@@ -41,28 +47,59 @@ export function ShowNotePage() {
         <SkeletonShowNote />
       ) : (
         <>
-          <h1 className="text-xl font-semibold">{note.name}</h1>
+          <div className="flex gap-3">
+            <h1 className="text-xl font-semibold max-w-lg overflow-hidden text-ellipsis">
+              {note.name}
+            </h1>
+            <Tooltip>
+              <TooltipTrigger>
+                <EditNoteName
+                  userId={userData?.id}
+                  noteId={noteId}
+                  setNote={setNote}
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Edit name</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
           <h2 className="text-sm">Created {formatDate(note.createdAt)}</h2>
           <div className="mt-4 flex gap-4 items-center">
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label="Back"
-              className="cursor-pointer"
-            >
-              <Link to="/notes">
-                <ArrowBigLeft />
-              </Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label="Read only"
-              className="cursor-pointer"
-              onClick={() => setIsReadOnlyText((state) => !state)}
-            >
-              {isReadOnlyText ? <Pencil /> : <Eye />}
-            </Button>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  aria-label="Back"
+                  className="cursor-pointer"
+                >
+                  <Link to="/notes">
+                    <ArrowBigLeft />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Go back</p>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  aria-label="Read only"
+                  className="cursor-pointer"
+                  onClick={() => setIsReadOnlyText((state) => !state)}
+                >
+                  {isReadOnlyText ? <Pencil /> : <Eye />}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                {isReadOnlyText ? <p>Edit</p> : <p>Read only</p>}
+              </TooltipContent>
+            </Tooltip>
           </div>
 
           <div className="mt-2">
