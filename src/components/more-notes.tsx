@@ -1,4 +1,5 @@
 import { CircleEllipsis } from "lucide-react";
+import { Virtuoso } from "react-virtuoso";
 
 import {
   Dialog,
@@ -9,7 +10,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { NoteCard } from "@/components/note-card";
 import type { NotePreview } from "@/types/types";
 
@@ -32,13 +32,18 @@ export function MoreNotes({ notes }: MoreNotesProps) {
             Remaining all your notes can be found here.
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="h-60">
-          <div className="flex flex-col gap-2">
-            {notes.slice(10).map((note) => (
-              <NoteCard key={note.id} note={note} position="left" />
-            ))}
-          </div>
-        </ScrollArea>
+        <Virtuoso
+          style={{ height: "240px" }}
+          className="h-60 no-scrollbar pl-28"
+          totalCount={notes.length}
+          itemContent={(index) => (
+            <NoteCard
+              key={notes[index].id}
+              note={notes[index]}
+              position="left"
+            />
+          )}
+        />
       </DialogContent>
     </Dialog>
   );

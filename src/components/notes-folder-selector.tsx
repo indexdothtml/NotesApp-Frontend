@@ -40,9 +40,18 @@ export function NotesFolderSelector({
 
   return (
     <div className="flex gap-32">
-      <Select onValueChange={onSelectChange}>
+      <Select
+        onValueChange={onSelectChange}
+        disabled={notesFolders.length === 0}
+      >
         <SelectTrigger className="w-45">
-          <SelectValue placeholder="Your notes folders" />
+          <SelectValue
+            placeholder={
+              notesFolders.length === 0
+                ? "Fetching folders..."
+                : "Your notes folders"
+            }
+          />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

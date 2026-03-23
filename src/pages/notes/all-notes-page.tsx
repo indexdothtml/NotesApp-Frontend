@@ -30,6 +30,8 @@ export function AllNotesPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSelectChange = async (value: string) => {
+    if (value === "_") return;
+
     setSelectedFolderId(value);
 
     if (isAuthenticated && userData) {
@@ -78,7 +80,7 @@ export function AllNotesPage() {
           {notes.slice(0, 10).map((note) => (
             <NoteCard key={note.id} note={note} />
           ))}
-          <MoreNotes notes={notes} />
+          <MoreNotes notes={notes.slice(10)} />
         </div>
       ) : (
         <Empty>

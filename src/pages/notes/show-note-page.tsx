@@ -52,7 +52,7 @@ export function ShowNotePage() {
               {note.name}
             </h1>
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <EditNoteName
                   userId={userData?.id}
                   noteId={noteId}
@@ -67,7 +67,7 @@ export function ShowNotePage() {
           <h2 className="text-sm">Created {formatDate(note.createdAt)}</h2>
           <div className="mt-4 flex gap-4 items-center">
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button
                   variant="outline"
                   size="icon"
@@ -85,7 +85,7 @@ export function ShowNotePage() {
             </Tooltip>
 
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Button
                   variant="outline"
                   size="icon"
