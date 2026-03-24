@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Spinner } from "@/components/ui/spinner";
 import { AddNotesFolder } from "@/components/add-notes-folder";
 import { getAllNotesFolders } from "@/services/notesServices";
 
@@ -52,6 +53,7 @@ export function NotesFolderSelector({
                 : "Your notes folders"
             }
           />
+          {notesFolders.length === 0 && <Spinner />}
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

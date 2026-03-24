@@ -1,8 +1,11 @@
 import { Link } from "react-router";
 
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 
 export function LandingPage() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <section className="ml-10 mr-10 mt-20 pl-20 flex items-center gap-10">
       <div>
@@ -12,7 +15,11 @@ export function LandingPage() {
           ideas, synced everywhere you go.
         </h2>
         <Button asChild>
-          <Link to="/signup">Get started for free</Link>
+          {isAuthenticated ? (
+            <Link to="/notes">Go to notes section</Link>
+          ) : (
+            <Link to="/signup">Get started for free</Link>
+          )}
         </Button>
       </div>
       <img
