@@ -8,12 +8,17 @@ import { ForgotPasswordPage } from "@/pages/auth/forgot-password-page";
 import { ResetPasswordPage } from "@/pages/auth/reset-password-page";
 import { AllNotesPage } from "@/pages/notes/all-notes-page";
 import { ShowNotePage } from "@/pages/notes/show-note-page";
+import { LandingPage } from "@/pages/notes/landing-page";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "/",
+        element: <LandingPage />,
+      },
       {
         path: "/login",
         element: <LoginPage />,

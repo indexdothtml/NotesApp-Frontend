@@ -38,17 +38,16 @@ export function NavBar() {
       <div>
         {isAuthenticated ? (
           <Button
-            variant="outline"
             aria-label="Logout"
             disabled={isLoggingOut}
             onClick={handleLogout}
-            className="cursor-pointer"
+            className="cursor-pointer hover:opacity-80"
           >
             {isLoggingOut && <Spinner />}
             {isLoggingOut ? "Logging out..." : "Logout"}
           </Button>
         ) : (
-          <Button variant="outline">
+          <Button asChild>
             <Link to="/login">Login</Link>
           </Button>
         )}
