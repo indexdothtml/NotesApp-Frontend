@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router";
 
 import { App } from "@/app";
 import { ProtectedRoute } from "@/components/protected-route";
-import { RootErrorBoundary } from "@/components/error-boundary";
+import { ErrorBoundary } from "@/components/error-boundary";
 import { LandingPage } from "@/pages/landing-page";
 import { LoginPage } from "@/pages/auth/login-page";
 import { SignupPage } from "@/pages/auth/signup-page";
@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    ErrorBoundary: RootErrorBoundary,
+    ErrorBoundary: ErrorBoundary,
     children: [
       {
         path: "/",
