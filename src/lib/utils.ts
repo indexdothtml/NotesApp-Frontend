@@ -22,9 +22,9 @@ export function formatDate(isoDateTimeFormatString: string) {
     return formattedDate;
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message);
+      throw new Error(error.message);
     } else {
-      console.log(`Error: ${error}`);
+      throw new Error(`Error: ${error}`);
     }
   }
 }
