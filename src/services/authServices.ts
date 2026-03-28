@@ -1,3 +1,23 @@
+export async function getCurrentUser() {
+  await new Promise((resolve) =>
+    setTimeout(() => {
+      resolve("get user details");
+    }, 3000),
+  );
+
+  return {
+    success: true,
+    data: {
+      id: "1",
+      name: "Abhi K",
+      email: "abhi@test.com",
+      username: "AK",
+      createdAt: "2026-03-09T20:00:00Z",
+      updatedAt: "2026-03-09T20:00:00Z",
+    },
+  };
+}
+
 export async function userLoginService(identifier: string, password: string) {
   await new Promise((resolve) =>
     setTimeout(() => {
