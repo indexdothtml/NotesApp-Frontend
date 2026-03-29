@@ -16,34 +16,32 @@ import { AddNote } from "@/components/add-note";
 import { MoreNotes } from "@/components/more-notes";
 import { SkeletonNotes } from "@/components/skeleton-notes";
 import { getAllNotes } from "@/services/notesServices";
+import { useNotes } from "@/hooks/useNotes";
 import { useAuth } from "@/hooks/useAuth";
-import type { NotePreview } from "@/types/types";
 
 export function AllNotesPage() {
   const { isAuthenticated, userData } = useAuth();
 
-  const [selectedFolderId, setSelectedFolderId] = useState<string | undefined>(
-    undefined,
-  );
+  const { dispatchSetNotes, dispatchSetCurrentFolder, notesData } = useNotes();
 
-  const [notes, setNotes] = useState<NotePreview[]>([]);
+  const notes = notesData.notes ?? [];
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSelectChange = async (value: string) => {
-    if (value === "_") return;
+  const handleSelectChange = async (currentFolderId: string) => {
+    if (currentFolderId === "_") return;
 
-    setSelectedFolderId(value);
+    dispatchSetCurrentFolder(currentFolderId);
 
     if (isAuthenticated && userData) {
       setIsLoading(true);
 
-      const response = await getAllNotes(userData.id, value);
+      const response = await getAllNotes(userData.id, currentFolderId);
 
       if (response.success) {
-        setNotes(response.data);
+        dispatchSetNotes(response.data);
       } else {
-        setNotes([]);
+        dispatchSetNotes([]);
       }
 
       setIsLoading(false);
@@ -60,16 +58,15 @@ export function AllNotesPage() {
           </h2>
         </div>
         <div className="flex gap-32">
-          <NotesFolderSelector onSelectChange={handleSelectChange} />
+          <NotesFolderSelector
+            userId={userData?.id}
+            onSelectChange={handleSelectChange}
+          />
 
           <div>
             <AddNotesFolder userId={userData?.id} />
 
-            <AddNote
-              userId={userData?.id}
-              folderId={selectedFolderId}
-              setNotes={setNotes}
-            />
+            <AddNote userId={userData?.id} />
           </div>
         </div>
       </div>

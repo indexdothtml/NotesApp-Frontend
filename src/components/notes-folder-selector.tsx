@@ -10,16 +10,21 @@ import { Spinner } from "@/components/ui/spinner";
 import { useNotes } from "@/hooks/useNotes";
 
 type NotesSelectorProps = {
-  onSelectChange: (value: string) => void;
+  userId?: string;
+  onSelectChange: (currentFolderId: string) => void;
 };
 
 export function NotesFolderSelector({ onSelectChange }: NotesSelectorProps) {
   const { notesData } = useNotes();
 
-  const { notesFolders } = notesData;
+  const { notesFolders, currentFolderId } = notesData;
 
   return (
-    <Select onValueChange={onSelectChange} disabled={notesFolders.length === 0}>
+    <Select
+      value={currentFolderId}
+      onValueChange={onSelectChange}
+      disabled={notesFolders.length === 0}
+    >
       <SelectTrigger className="w-45">
         <SelectValue
           placeholder={

@@ -5,6 +5,7 @@ import {
   setNotes,
   unsetFolders,
   addNewFolder,
+  addNewNote,
 } from "@/features/notesSlice";
 import type { NotesFolder, NotePreview } from "@/types/types";
 
@@ -20,18 +21,24 @@ export function useNotes() {
     dispatch(setFolders(folders));
   };
 
+  // Add new folder.
   const dispatchAddNewFolder = (folder: NotesFolder) => {
     dispatch(addNewFolder(folder));
   };
 
   // Set current selected folder.
-  const dispatchSetCurrentFolder = (currentFolder: NotesFolder) => {
-    dispatch(setCurrentFolder(currentFolder));
+  const dispatchSetCurrentFolder = (currentFolderId: NotesFolder["id"]) => {
+    dispatch(setCurrentFolder(currentFolderId));
   };
 
   // Set current selected folder's notes.
   const dispatchSetNotes = (notes: NotePreview[]) => {
     dispatch(setNotes(notes));
+  };
+
+  // Add new note.
+  const dispatchAddNewNote = (note: NotePreview) => {
+    dispatch(addNewNote(note));
   };
 
   // Unset folder selection.
@@ -46,5 +53,6 @@ export function useNotes() {
     dispatchSetNotes,
     dispatchUnsetFolders,
     dispatchAddNewFolder,
+    dispatchAddNewNote,
   };
 }

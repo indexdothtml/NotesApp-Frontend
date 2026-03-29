@@ -1,6 +1,7 @@
-import { useState, type Dispatch, type SetStateAction } from "react";
+import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { FilePlus } from "lucide-react";
+import { toast } from "sonner";
 
 import {
   Dialog,
@@ -16,8 +17,9 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
+import { useNotes } from "@/hooks/useNotes";
+import { useAuth } from "@/hooks/useAuth";
 import { addNewNote } from "@/services/notesServices";
-import type { NotePreview } from "@/types/types";
 
 type FormValues = {
   name: string;
@@ -25,25 +27,32 @@ type FormValues = {
 
 type AddNoteProps = {
   userId?: string;
-  folderId?: string;
-  setNotes: Dispatch<SetStateAction<NotePreview[]>>;
 };
 
-export function AddNote({ userId, folderId, setNotes }: AddNoteProps) {
+export function AddNote({ userId }: AddNoteProps) {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<FormValues>();
 
+  const { dispatchAddNewNote, notesData } = useNotes();
+
+  const { currentFolderId } = notesData;
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOnSubmit: SubmitHandler<FormValues> = async ({ name }) => {
-    if (userId && folderId) {
-      const response = await addNewNote(userId, folderId, name);
+    if (!currentFolderId && currentFolderId === "_")
+      toast.error("First create new folder.", {
+        position: "top-center",
+      });
+
+    if (userId && currentFolderId) {
+      const response = await addNewNote(userId, currentFolderId, name);
 
       if (response.success) {
-        setNotes((prev) => [response.data, ...prev]);
+        dispatchAddNewNote(response.data);
       }
     }
 

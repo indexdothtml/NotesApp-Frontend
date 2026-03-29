@@ -9,6 +9,8 @@ type NotesInitialState = {
 const initialState: NotesInitialState = {
   notesData: {
     notesFolders: [],
+    currentFolderId: undefined,
+    notes: [],
   },
 };
 
@@ -31,12 +33,19 @@ export const notesSlice = createSlice({
       state.notesData.notesFolders = [];
     },
 
-    setCurrentFolder: (state, action: PayloadAction<NotesFolder>) => {
-      state.notesData.currentFolder = action.payload;
+    setCurrentFolder: (state, action: PayloadAction<NotesFolder["id"]>) => {
+      state.notesData.currentFolderId = action.payload;
     },
 
     setNotes: (state, action: PayloadAction<NotePreview[]>) => {
       state.notesData.notes = action.payload;
+    },
+
+    addNewNote: (state, action: PayloadAction<NotePreview>) => {
+      state.notesData.notes = [
+        action.payload,
+        ...(state.notesData.notes ?? []),
+      ];
     },
   },
 });
@@ -48,6 +57,7 @@ export const {
   unsetFolders,
   setCurrentFolder,
   setNotes,
+  addNewNote,
 } = notesSlice.actions;
 
 export default notesSlice.reducer;

@@ -31,6 +31,6 @@ export type NotesFolder = { id: string; name: string };
 
 export type NotesData = {
   notesFolders: NotesFolder[];
-  currentFolder?: NotesFolder;
+  currentFolderId?: NotesFolder["id"];
   notes?: NotePreview[];
 };
