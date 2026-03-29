@@ -2,10 +2,10 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import type { UserData } from "@/types/types";
 
-interface AuthInitialState {
+type AuthInitialState = {
   isAuthenticated: boolean;
   userData: UserData | null;
-}
+};
 
 const initialState: AuthInitialState = {
   isAuthenticated: false,

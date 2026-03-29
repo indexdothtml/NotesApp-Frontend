@@ -26,3 +26,11 @@ export type Hyperlink = {
   href: string;
   target?: string;
 };
+
+export type NotesFolder = { id: string; name: string };
+
+export type NotesData = {
+  notesFolders: NotesFolder[];
+  currentFolder?: NotesFolder;
+  notes?: NotePreview[];
+};

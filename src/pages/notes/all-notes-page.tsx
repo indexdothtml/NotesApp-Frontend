@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/empty";
 import { NoteCard } from "@/components/note-card";
 import { NotesFolderSelector } from "@/components/notes-folder-selector";
+import { AddNotesFolder } from "@/components/add-notes-folder";
 import { AddNote } from "@/components/add-note";
 import { MoreNotes } from "@/components/more-notes";
 import { SkeletonNotes } from "@/components/skeleton-notes";
@@ -58,12 +59,12 @@ export function AllNotesPage() {
             Here you can find all of your notes from selected folder.
           </h2>
         </div>
-        <div className="flex">
-          <NotesFolderSelector
-            userId={userData?.id}
-            onSelectChange={handleSelectChange}
-          />
+        <div className="flex gap-32">
+          <NotesFolderSelector onSelectChange={handleSelectChange} />
+
           <div>
+            <AddNotesFolder userId={userData?.id} />
+
             <AddNote
               userId={userData?.id}
               folderId={selectedFolderId}

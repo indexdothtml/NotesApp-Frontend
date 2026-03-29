@@ -1,4 +1,4 @@
-import { useState, type Dispatch, type SetStateAction } from "react";
+import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { FolderPlus } from "lucide-react";
 
@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
+import { useNotes } from "@/hooks/useNotes";
 import { addNewNotesFolder } from "@/services/notesServices";
 
 type FormValues = {
@@ -24,20 +25,9 @@ type FormValues = {
 
 type AddNotesFolderProps = {
   userId?: string;
-  setNotesFolders: Dispatch<
-    SetStateAction<
-      {
-        id: string;
-        name: string;
-      }[]
-    >
-  >;
 };
 
-export function AddNotesFolder({
-  userId,
-  setNotesFolders,
-}: AddNotesFolderProps) {
+export function AddNotesFolder({ userId }: AddNotesFolderProps) {
   const {
     register,
     handleSubmit,
@@ -46,6 +36,8 @@ export function AddNotesFolder({
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const { dispatchAddNewFolder } = useNotes();
+
   const onFormSubmit: SubmitHandler<FormValues> = async ({ name }) => {
     // API response should return newly added folder details like its id and name. So state can update instantly with refetching data.
     if (userId) {
@@ -53,10 +45,7 @@ export function AddNotesFolder({
 
       if (response.success) {
         // Updating state of folders.
-        setNotesFolders((prev) => [
-          { id: response.data.id, name: response.data.name },
-          ...prev,
-        ]);
+        dispatchAddNewFolder(response.data);
       }
     }
     setIsOpen(false);
