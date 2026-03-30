@@ -363,3 +363,16 @@ export async function getAllNotes(userId: string, folderId: string) {
     ],
   };
 }
+
+export async function deleteCurrentFolder(userId: string, folderId: string) {
+  await new Promise((resolve) =>
+    setTimeout(() => resolve(`${userId} ${folderId}`), 3000),
+  );
+
+  return {
+    success: true,
+    data: {
+      folderId,
+    },
+  };
+}

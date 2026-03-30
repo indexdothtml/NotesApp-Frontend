@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ButtonHTMLAttributes } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { FolderPlus } from "lucide-react";
 
@@ -25,9 +25,12 @@ type FormValues = {
 
 type AddNotesFolderProps = {
   userId?: string;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function AddNotesFolder({ userId }: AddNotesFolderProps) {
+export function AddNotesFolder({
+  userId,
+  ...buttonProps
+}: AddNotesFolderProps) {
   const {
     register,
     handleSubmit,
@@ -54,7 +57,7 @@ export function AddNotesFolder({ userId }: AddNotesFolderProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="cursor-pointer">
+        <Button variant="ghost" className="cursor-pointer" {...buttonProps}>
           <FolderPlus /> New folder
         </Button>
       </DialogTrigger>

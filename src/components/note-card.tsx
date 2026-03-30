@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { type ButtonHTMLAttributes } from "react";
 
 import {
   HoverCard,
@@ -12,13 +13,17 @@ import type { NotePreview } from "@/types/types";
 type NoteCardProps = {
   note: NotePreview;
   position?: "bottom" | "left" | "top" | "right";
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function NoteCard({ note, position = "bottom" }: NoteCardProps) {
+export function NoteCard({
+  note,
+  position = "bottom",
+  ...buttonProps
+}: NoteCardProps) {
   return (
     <HoverCard key={note.id} openDelay={100} closeDelay={100}>
       <HoverCardTrigger asChild>
-        <Button variant="link" className="cursor-pointer">
+        <Button variant="link" className="cursor-pointer" {...buttonProps}>
           <Link to={`/notes/${note.id}`}>{note.name}</Link>
         </Button>
       </HoverCardTrigger>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ButtonHTMLAttributes } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { FilePlus } from "lucide-react";
 import { toast } from "sonner";
@@ -26,9 +26,9 @@ type FormValues = {
 
 type AddNoteProps = {
   userId?: string;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function AddNote({ userId }: AddNoteProps) {
+export function AddNote({ userId, ...buttonProps }: AddNoteProps) {
   const {
     register,
     handleSubmit,
@@ -61,7 +61,7 @@ export function AddNote({ userId }: AddNoteProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="cursor-pointer">
+        <Button variant="ghost" className="cursor-pointer" {...buttonProps}>
           <FilePlus /> New note
         </Button>
       </DialogTrigger>

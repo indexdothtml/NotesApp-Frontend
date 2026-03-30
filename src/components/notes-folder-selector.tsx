@@ -1,3 +1,5 @@
+import { type SelectHTMLAttributes } from "react";
+
 import {
   Select,
   SelectContent,
@@ -12,9 +14,12 @@ import { useNotes } from "@/hooks/useNotes";
 type NotesSelectorProps = {
   userId?: string;
   onSelectChange: (currentFolderId: string) => void;
-};
+} & SelectHTMLAttributes<HTMLSelectElement>;
 
-export function NotesFolderSelector({ onSelectChange }: NotesSelectorProps) {
+export function NotesFolderSelector({
+  onSelectChange,
+  disabled,
+}: NotesSelectorProps) {
   const { notesData } = useNotes();
 
   const { notesFolders, currentFolderId } = notesData;
@@ -23,7 +28,7 @@ export function NotesFolderSelector({ onSelectChange }: NotesSelectorProps) {
     <Select
       value={currentFolderId}
       onValueChange={onSelectChange}
-      disabled={notesFolders.length === 0}
+      disabled={notesFolders.length === 0 || disabled}
     >
       <SelectTrigger className="w-45">
         <SelectValue

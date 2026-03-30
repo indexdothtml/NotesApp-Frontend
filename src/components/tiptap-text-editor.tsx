@@ -9,18 +9,8 @@ import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { TiptapTextEditorMenu } from "@/components/tiptap-text-editor-menu";
+import { DeleteWithCaution } from "@/components/delete-with-caution";
 import { updateNote, deleteNote } from "@/services/notesServices";
 
 type TiptapTextEditorProps = {
@@ -111,34 +101,22 @@ export function TiptapTextEditor({
           {isSaving ? "Saving..." : "Save"}
         </Button>
 
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button
-              variant="destructive"
-              aria-label="Delete"
-              className="cursor-pointer mt-2"
-              disabled={readOnly || isDeleting || isSaving}
-            >
-              {isDeleting && <Spinner />}
-              {isDeleting ? "Deleting..." : "Delete"}
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your
-                note.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleDelete}>
-                Continue
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <DeleteWithCaution
+          alertTitle="Are you absolutely sure?"
+          alertDescription="This action cannot be undone. This will permanently delete your
+                note."
+          onDelete={handleDelete}
+        >
+          <Button
+            variant="destructive"
+            aria-label="Delete"
+            className="cursor-pointer mt-2"
+            disabled={readOnly || isDeleting || isSaving}
+          >
+            {isDeleting && <Spinner />}
+            {isDeleting ? "Deleting..." : "Delete"}
+          </Button>
+        </DeleteWithCaution>
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import { CircleEllipsis } from "lucide-react";
 import { Virtuoso } from "react-virtuoso";
+import { type ButtonHTMLAttributes } from "react";
 
 import {
   Dialog,
@@ -15,13 +16,13 @@ import type { NotePreview } from "@/types/types";
 
 type MoreNotesProps = {
   notes: NotePreview[];
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function MoreNotes({ notes }: MoreNotesProps) {
+export function MoreNotes({ notes, ...buttonProps }: MoreNotesProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="link" className="cursor-pointer">
+        <Button variant="link" className="cursor-pointer" {...buttonProps}>
           <CircleEllipsis /> More
         </Button>
       </DialogTrigger>
