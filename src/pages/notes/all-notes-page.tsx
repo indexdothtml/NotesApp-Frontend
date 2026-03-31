@@ -139,7 +139,11 @@ export function AllNotesPage() {
           {notes.slice(0, 10).map((note) => (
             <NoteCard key={note.id} note={note} disabled={isDeletingFolder} />
           ))}
-          <MoreNotes notes={notes.slice(10)} disabled={isDeletingFolder} />
+          <MoreNotes
+            userId={userData?.id}
+            notes={notes.slice(10)}
+            disabled={isDeletingFolder}
+          />
         </div>
       ) : (
         <Empty>

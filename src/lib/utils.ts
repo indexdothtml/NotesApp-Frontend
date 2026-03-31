@@ -2,6 +2,10 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { Editor } from "@tiptap/core";
 import type { EditorStateSnapshot } from "@tiptap/react";
+import type { Dispatch, SetStateAction } from "react";
+
+import { searchNotes } from "@/services/notesServices";
+import type { NotePreview } from "@/types/types";
 
 // Tailwind merge method.
 export function cn(...inputs: ClassValue[]) {
@@ -73,3 +77,18 @@ export function menuBarStateSelector(ctx: EditorStateSnapshot<Editor>) {
 }
 
 export type MenuBarState = ReturnType<typeof menuBarStateSelector>;
+
+// Debounce function for search operation.
+export function debounceSearchQuery(
+  userId: string,
+  searchQuery: string,
+  delay: number,
+  initialTimeoutId: number | undefined,
+  setSearchedNotes: Dispatch<SetStateAction<NotePreview[]>>,
+) {
+  clearTimeout(initialTimeoutId);
+
+  return setTimeout(async () => {
+    setSearchedNotes((await searchNotes(userId, searchQuery)).data);
+  }, delay);
+}
