@@ -49,15 +49,54 @@ export async function userLogoutService() {
   };
 }
 
+export async function sendOTP(email: string) {
+  await new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(`${email}`);
+    }, 3000),
+  );
+
+  return {
+    success: true,
+    validTill: 60000,
+    error: "",
+  };
+}
+
+export async function verifyOTP(otp: string) {
+  await new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(`${otp}`);
+    }, 3000),
+  );
+
+  return {
+    success: true,
+    error: "",
+  };
+}
+
+export async function getOTPStatus(email: string) {
+  await new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(`${email}`);
+    }, 3000),
+  );
+
+  return {
+    success: true,
+    validTill: 20000,
+  };
+}
+
 export async function userSignupService(
   name: string,
-  username: string,
   email: string,
   password: string,
 ) {
   await new Promise((resolve) =>
     setTimeout(() => {
-      resolve(`${name} ${username} ${email} ${password}`);
+      resolve(`${name} ${email} ${password}`);
     }, 3000),
   );
   return {
@@ -66,7 +105,6 @@ export async function userSignupService(
       id: "1",
       name: "Abhi K",
       email: "abhi@test.com",
-      username: "AK",
       createdAt: "2026-03-09T20:00:00Z",
       updatedAt: "2026-03-09T20:00:00Z",
     },

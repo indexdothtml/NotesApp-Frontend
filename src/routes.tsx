@@ -5,7 +5,7 @@ import { ProtectedRoute } from "@/components/protected-route";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { LandingPage } from "@/pages/landing-page";
 import { LoginPage } from "@/pages/auth/login-page";
-import { SignupPage } from "@/pages/auth/signup-page";
+import { VerifyEmailPage } from "@/pages/auth/verify-email-page";
 import { ForgotPasswordPage } from "@/pages/auth/forgot-password-page";
 import { ResetPasswordPage } from "@/pages/auth/reset-password-page";
 import { AllNotesPage } from "@/pages/notes/all-notes-page";
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <SignupPage />,
+        element: <VerifyEmailPage />,
       },
       {
         path: "/forgotPassword",

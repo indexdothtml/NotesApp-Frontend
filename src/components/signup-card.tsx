@@ -20,12 +20,14 @@ import { useAuth } from "@/hooks/useAuth";
 
 type FormValues = {
   name: string;
-  username: string;
-  email: string;
   password: string;
 };
 
-export function SignupPage() {
+type SignupCardProps = {
+  email: string;
+};
+
+export function SignupCard({ email }: SignupCardProps) {
   const {
     register,
     handleSubmit,
@@ -38,11 +40,9 @@ export function SignupPage() {
 
   const handleServiceCall: SubmitHandler<FormValues> = async ({
     name,
-    username,
-    email,
     password,
   }) => {
-    const response = await userSignupService(name, username, email, password);
+    const response = await userSignupService(name, email, password);
 
     if (response.success) {
       const response = await userLoginService(email, password);
@@ -88,22 +88,13 @@ export function SignupPage() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                type="text"
-                placeholder="virat#K18"
-                {...register("username", { required: true })}
-              />
-            </div>
-
-            <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
                 placeholder="m@example.com"
-                {...register("email", { required: true })}
+                readOnly={true}
+                value={email}
               />
             </div>
 
