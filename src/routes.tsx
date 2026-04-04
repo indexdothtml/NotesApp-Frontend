@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 
 import { App } from "@/app";
 import { ProtectedRoute } from "@/components/protected-route";
+import { PublicRoute } from "@/components/public-route";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { LandingPage } from "@/pages/landing-page";
 import { LoginPage } from "@/pages/auth/login-page";
@@ -23,19 +24,35 @@ export const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <LoginPage />,
+        element: (
+          <PublicRoute>
+            <LoginPage />
+          </PublicRoute>
+        ),
       },
       {
         path: "/signup",
-        element: <VerifyEmailPage />,
+        element: (
+          <PublicRoute>
+            <VerifyEmailPage />
+          </PublicRoute>
+        ),
       },
       {
         path: "/forgotPassword",
-        element: <ForgotPasswordPage />,
+        element: (
+          <PublicRoute>
+            <ForgotPasswordPage />
+          </PublicRoute>
+        ),
       },
       {
         path: "/resetPassword/:token",
-        element: <ResetPasswordPage />,
+        element: (
+          <PublicRoute>
+            <ResetPasswordPage />
+          </PublicRoute>
+        ),
       },
       {
         path: "/notes",
